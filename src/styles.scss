@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --rolebot-green-fade: #0a273377;
+  --secondary-color: #073b4c;
+
+  --rolebot-red: #FD2946;
+  --rolebot-green: #0a2733;
+
+  // For custom embeds
+  --discord-theme: #36393f;
+  --discord-embed-theme: #2f3136;
+  --blurple: #5865f2;
+
+  --grey: #808080;
+  --grey-fade: #8080802a;
+
+  --grey-text-fade: #969292e3;
+
+  --white: #F0EDE4;
+  --off-white: #D3D3D3;
+
+  font-size: 125%;
+  font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  color: var(--white);
+
+  background-color: var(--secondary-color);
+}
