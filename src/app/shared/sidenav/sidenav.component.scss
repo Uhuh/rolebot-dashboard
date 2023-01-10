@@ -1,0 +1,65 @@
+:host {
+  display: flex;
+  background-color: var(--rolebot-green-fade);
+}
+
+.server-list {
+  display: flex;
+  flex-direction: column;
+
+  padding: 15px;
+  gap: 5px;
+
+  background-color: var(--rolebot-green);
+
+  overflow-y: auto;
+}
+
+.server-list::-webkit-scrollbar {
+  width: 0px !important;
+  background: transparent; /* make scrollbar transparent */
+}
+
+.server-icon img {
+  border-radius: 10px;
+}
+
+.server-options {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.login {
+  text-transform: uppercase;
+  padding: 10px;
+
+  width: 100%;
+  text-align: center;
+
+  border: 2px solid var(--off-white);
+  border-radius: 7px;
+
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: var(--discord-theme);
+  }
+}
+
+.user-info {
+  display: flex;
+  margin-top: auto;
+  justify-content: space-between;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
