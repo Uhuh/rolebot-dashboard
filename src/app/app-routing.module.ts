@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./modules/servers/servers.module').then((m) => m.ServersModule),
+      import('./modules/home/home.module').then((m) => m.HomeModule),
   },
   {
     path: 'dashboard/:guildId',
