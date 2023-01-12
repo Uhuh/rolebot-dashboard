@@ -9,10 +9,11 @@ import { AuthInceptor } from './shared/interceptors/http-interceptor';
 import { SidenavModule } from './shared/sidenav/sidenav.module';
 import { COOKIES } from './shared/tokens/cookies.token';
 import { LOCAL_STORAGE } from './shared/tokens/localStorage.token';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, SidenavModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, SidenavModule, HttpClientModule, BrowserAnimationsModule],
   providers: [
     {
       provide: COOKIES,
