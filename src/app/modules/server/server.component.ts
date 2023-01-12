@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { JwtService } from 'src/app/shared/services/jwtHandler.service';
-import { IGuild } from 'src/app/shared/types/interfaces';
+import { ICategory, IGuild } from 'src/app/shared/types/interfaces';
 
 @Component({
   selector: 'app-server',
@@ -11,6 +11,7 @@ import { IGuild } from 'src/app/shared/types/interfaces';
 })
 export class ServerComponent implements OnInit {
   guild?: IGuild;
+  categories: ICategory[] = [];
 
   constructor(
     private readonly jwtHandler: JwtService,

@@ -11,7 +11,9 @@
     <img [src]="guildIcon" />
   </div>
   <a routerLink="" class="link">Servers</a>
-  <a routerLink="category" class="link">Category</a>
+  <a [routerLink]="['/dashboard', selectedGuild?.id, 'category']" class="link">
+    Category
+  </a>
   <a routerLink="roles" class="link">Roles</a>
   <a routerLink="" class="link"></a>
   <div class="user-info">
