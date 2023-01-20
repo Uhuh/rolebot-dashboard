@@ -1,0 +1,67 @@
+.card-wrapper {
+  display: flex;
+  break-inside: avoid;
+
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: var(--third-color);
+
+  width: 200px;
+
+  img {
+    border-radius: 50%;
+    height: 100px;
+    aspect-ratio: 1/1;
+    border: 2px solid var(--secondary-light)
+  }
+
+  .icon {
+    align-self: center;
+  }
+
+  .guild-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+
+    .manage, .invite {
+      border-radius: 4px;
+      padding: 4px 6px;
+      background-color: var(--third-light);
+      transition: all 0.175s;
+
+      &:hover {
+        background-color: var(--secondary-light);
+      }
+    }
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  outline: 2px solid var(--third-light);
+
+  transition: all 0.1s;
+  &:hover {
+    outline: 2px solid var(--secondary-light);
+
+    animation: pulse-animation 1s infinite;
+  }
+}
