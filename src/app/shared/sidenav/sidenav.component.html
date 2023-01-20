@@ -1,29 +1,37 @@
-<div class="server-list">
-  <app-server
-    *ngFor="let guild of guilds"
-    [guild]="guild"
-    (selectedGuild)="setSelected($event)"
-  ></app-server>
-</div>
 <div class="server-options">
-  <div></div>
-  <div class="server-icon">
-    <img [src]="guildIcon" />
-  </div>
-  <a routerLink="" class="link">Servers</a>
-  <a [routerLink]="['/dashboard', selectedGuild?.id, 'category']" class="link">
-    Category
-  </a>
-  <a routerLink="roles" class="link">Roles</a>
-  <a routerLink="" class="link"></a>
-  <div class="user-info">
-    <div class="login" *ngIf="!isFresh">
-      <a
-        href="https://discord.com/api/oauth2/authorize?client_id=741682757486510081&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F&response_type=code&scope=guilds%20identify"
-      >
-        Log In
-      </a>
+  <div *ngIf="selectedGuild">
+    <div class="server-info">
+      <img [src]="guildIcon" />
+      <span class="name">{{ selectedGuild.name }}</span>
     </div>
+    <div class="links">
+      <a class="link" [routerLink]="['/servers']" (click)="removeSelected()">
+        Servers
+      </a>
+      <a
+        class="link"
+        [routerLink]="['/dashboard/config']"
+        queryParamsHandling="merge"
+      >
+        Config
+      </a>
+      <a
+        class="link"
+        [routerLink]="['/dashboard/category']"
+        queryParamsHandling="merge"
+      >
+        Category
+      </a>
+      <a class="link" [routerLink]="[]">Role</a>
+    </div>
+  </div>
+
+  <div *ngIf="!selectedGuild">
+    <app-info></app-info>
+  </div>
+
+  <div class="user-info">
+    <a [href]="loginUrl" class="login" *ngIf="!isFresh"> Log In </a>
     <app-user *ngIf="isFresh"></app-user>
   </div>
 </div>

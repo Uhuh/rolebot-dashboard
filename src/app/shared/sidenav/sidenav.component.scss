@@ -1,46 +1,48 @@
 :host {
   display: flex;
-  background-color: var(--rolebot-green-fade);
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+
+  color: var(--secondary-light);
+  font-size: 18px;
+  background-color: var(--secondary-dark);
 }
 
-.server-list {
+.server-info {
   display: flex;
   flex-direction: column;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 
-  padding: 15px;
-  gap: 5px;
+  border-bottom: 2px solid var(--secondary-light);
 
-  background-color: var(--rolebot-green);
+  img {
+    margin: auto;
+    border: 2px solid var(--secondary-light);
+    background: linear-gradient(to right, var(--secondary-color), var(--secondary-light));
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
 
-  overflow-y: auto;
-}
-
-.server-list::-webkit-scrollbar {
-  width: 0px !important;
-  background: transparent; /* make scrollbar transparent */
-}
-
-.server-icon img {
-  border-radius: 10px;
+  .name {
+    color: var(--white);
+    font-size: 24px;
+    text-align: center;
+  }
 }
 
 .server-options {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  width: 100%;
   padding: 20px;
 }
 
-.link {
-  text-decoration: none;
-  color: white;
-}
-
 .login {
-  text-transform: uppercase;
+  width: 100%;
   padding: 10px;
 
-  width: 100%;
   text-align: center;
 
   border: 2px solid var(--off-white);
@@ -49,17 +51,19 @@
   transition: all 0.3s;
 
   &:hover {
-    background-color: var(--discord-theme);
+    cursor: pointer;
+    border: 2px solid var(--secondary-light);
+    background-color: var(--third-color);
+    a {
+      transition: all 0.2s;
+      color: var(--off-white);
+    }
   }
 }
 
 .user-info {
   display: flex;
+  width: 100%;
   margin-top: auto;
   justify-content: space-between;
-
-  a {
-    text-decoration: none;
-    color: white;
-  }
 }
