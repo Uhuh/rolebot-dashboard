@@ -26,4 +26,8 @@ export class UserComponent {
   get avatar() {
     return `https://images.discordapp.net/avatars/${this.userId}/${this.avatarId}`;
   }
+
+  logout() {
+    this.jwtHandler.logout();
+  }
 }
