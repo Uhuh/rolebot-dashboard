@@ -66,10 +66,16 @@ export class JwtService {
     this.updateJwtToken();
   }
 
+  logout() {
+    this.removeStorageToken();
+    window.location.assign('/');
+  }
+
   updateJwtToken(): void {
     const token = this.getStorageToken();
 
     if (!token) {
+      console.info('No token found in storage.');
       this.invalidToken();
       return;
     }
@@ -116,6 +122,10 @@ export class JwtService {
 
   private getStorageToken(key = 'jwtToken'): string | null {
     return this.localStorage.getItem(key);
+  }
+
+  private removeStorageToken(key = 'jwtToken') {
+    return this.localStorage.removeItem(key);
   }
 
   get isExpired(): boolean {

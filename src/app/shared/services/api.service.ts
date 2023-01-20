@@ -4,7 +4,7 @@ import { CookiesStatic } from 'js-cookie';
 import { map, Observable } from 'rxjs';
 import { COOKIES } from '../tokens/cookies.token';
 import { LOCAL_STORAGE } from '../tokens/localStorage.token';
-import { ICategory, IReactRole } from '../types/interfaces';
+import { ICategory, IGuildConfig, IReactRole } from '../types/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +44,14 @@ export class ApiService {
         params: { guildId },
       }
     );
+  }
+
+  getGuildConfig(guildId: string): Observable<IGuildConfig> {
+    return this.http.get<IGuildConfig>(`${this.apiUrl}/Guild/GetConfig`, {
+      headers: this.headers,
+      withCredentials: true,
+      params: { guildId },
+    });
   }
 
   /**
