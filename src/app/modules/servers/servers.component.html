@@ -1,0 +1,9 @@
+<div class="header">
+  <h1>Hello world!</h1>
+</div>
+<div class="wrapper" *ngIf="isFresh">
+  <app-server-card
+    *ngFor="let guild of guilds"
+    [guild]="guild"
+  ></app-server-card>
+</div>
