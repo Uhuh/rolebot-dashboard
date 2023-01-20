@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { of, Subject, switchMap, takeUntil } from 'rxjs';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { GuildReactType, IGuildConfig } from 'src/app/shared/types/interfaces';
 
@@ -25,21 +25,24 @@ export class ConfigComponent implements OnDestroy {
     private readonly apiService: ApiService
   ) {
     this.route.queryParams
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((params) => {
-        const guildId = params['guildId'];
+      .pipe(
+        takeUntil(this.destroyed$),
+        switchMap((params) => {
+          const guildId = params['guildId'];
 
-        if (!guildId) return;
+          if (!guildId) return of(null);
 
-        this.apiService
-          .getGuildConfig(guildId)
-          .pipe(takeUntil(this.destroyed$))
-          .subscribe((config) => {
-            console.table(config);
-            this.config = config;
-            this.configType = config.reactType;
-            this.hideEmojis = config.hideEmojis;
-          });
+          return this.apiService.getGuildConfig(guildId);
+        })
+      )
+      .subscribe((config) => {
+        if (!config) {
+          return console.error(`Guild config missing.`);
+        }
+
+        this.config = config;
+        this.configType = config.reactType;
+        this.hideEmojis = config.hideEmojis;
       });
   }
 
