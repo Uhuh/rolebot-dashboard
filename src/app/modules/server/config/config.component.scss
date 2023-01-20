@@ -1,0 +1,37 @@
+h1 {
+  margin: 0;
+}
+
+.header {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: clamp(16px, 2vw, 18px);
+    margin: 0;
+  }
+
+  border-bottom: 2px solid var(--third-light);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.title {
+  font-size: clamp(18px, 2vw, 22px);
+  padding: 0 0 5px 5px;
+}
+
+app-card-row {
+  p {
+    color: var(--off-white);
+    margin: 0;
+  }
+}
