@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  padding: 15px;
+  border-radius: 4px;
+  background-color: var(--third-color);
+
+  border-left: 4px solid var(--rolebot-red);
+}
+
