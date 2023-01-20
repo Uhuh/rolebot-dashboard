@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { JwtService } from 'src/app/shared/services/jwtHandler.service';
 import { ICategory, IGuild } from 'src/app/shared/types/interfaces';
@@ -15,15 +15,17 @@ export class ServerComponent implements OnInit {
 
   constructor(
     private readonly jwtHandler: JwtService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) {
-    combineLatest([this.route.params, this.jwtHandler.guilds$]).subscribe(
+    combineLatest([this.route.queryParams, this.jwtHandler.guilds$]).subscribe(
       ([params, guilds]) => {
-        if (!guilds) return;
-
         const guildId = params['guildId'];
+        this.guild = guilds?.find((g) => g.id === guildId);
 
-        this.guild = guilds.find((g) => g.id === guildId);
+        if (!this.guild) {
+          this.router.navigate(['/']);
+        }
       }
     );
   }
