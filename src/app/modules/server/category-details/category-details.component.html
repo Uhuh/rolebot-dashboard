@@ -1,1 +1,8 @@
-<p>category-details works!</p>
+<div class="category-wrapper">
+  <a
+    *ngFor="let category of categories"
+    [routerLink]="['/dashboard', category.guildId, 'category', category.id]"
+  >
+    <span>{{ category.name }}</span>
+  </a>
+</div>

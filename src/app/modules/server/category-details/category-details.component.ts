@@ -30,7 +30,6 @@ export class CategoryDetailsComponent {
         })
       )
       .subscribe((categories) => {
-        console.log(categories);
         this.categories = categories;
       });
   }
