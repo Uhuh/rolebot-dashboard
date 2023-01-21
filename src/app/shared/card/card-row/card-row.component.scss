@@ -1,4 +1,4 @@
-.wrapper {
+.card-row {
   display: flex;
   flex-direction: column;
 
@@ -9,3 +9,10 @@
   border-left: 4px solid var(--rolebot-red);
 }
 
+.card-row-title {
+  font-size: clamp(18px, 2vw, 22px);
+}
+
+.card-row-description {
+  color: var(--off-white);
+}

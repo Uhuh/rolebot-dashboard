@@ -1,21 +1,5 @@
-h1 {
-  margin: 0;
-}
-
 .wrapper {
   display: flex;
   flex-direction: column;
   gap: 15px;
-}
-
-.title {
-  font-size: clamp(18px, 2vw, 22px);
-  padding: 0 0 5px 5px;
-}
-
-app-card-row {
-  p {
-    color: var(--off-white);
-    margin: 0;
-  }
 }

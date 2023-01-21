@@ -7,8 +7,10 @@
     <app-card>
       <h1>Config</h1>
       <app-card-row>
-        <label class="title">How to obtain roles</label>
-        <p>Choose whether to use reactions or buttons to get roles.</p>
+        <label class="card-row-title">How to obtain roles</label>
+        <p class="card-row-description">
+          Choose whether to use reactions or buttons to get roles.
+        </p>
         <mat-radio-group
           aria-labelledby="radio-group-label"
           [(ngModel)]="configType"
@@ -24,8 +26,10 @@
         </mat-radio-group>
       </app-card-row>
       <app-card-row>
-        <label class="title">Hide emojis</label>
-        <p>Choose whether to hide emojis when using the button view.</p>
+        <label class="card-row-title">Hide emojis</label>
+        <p class="card-row-description">
+          Choose whether to hide emojis when using the button view.
+        </p>
         <mat-checkbox
           [color]="'primary'"
           [(ngModel)]="hideEmojis"
