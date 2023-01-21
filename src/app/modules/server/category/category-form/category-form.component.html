@@ -1,0 +1,42 @@
+<ng-container [formGroup]="categoryGroup">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      placeholder="Write a description!"
+      formControlName="description"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Display order</mat-label>
+    <mat-select
+      formControlName="displayOrder"
+      matTooltipPosition="above"
+      matTooltip="The display order determines how roles and reactions display in embeds."
+    >
+      <mat-option value="0">Alphabetical</mat-option>
+      <mat-option value="1">Reversed Alphabetical</mat-option>
+      <mat-option value="2">Time added</mat-option>
+      <mat-option value="3">Reversed time added</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <mat-checkbox formControlName="mutuallyExclusive">
+      Mutually exclusive
+      <mat-icon
+        matTooltipPosition="above"
+        matTooltip="Enabling this will prevent users from obtaining more than one role from this category."
+      >
+        info
+      </mat-icon>
+    </mat-checkbox>
+    <p class="description"></p>
+  </div>
+</ng-container>

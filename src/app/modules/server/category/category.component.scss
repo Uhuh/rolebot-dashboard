@@ -1,0 +1,13 @@
+cdk-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+cdk-accordion-item:hover {
+  cursor: pointer;
+}
+
+mat-icon {
+  margin-left: auto;
+}

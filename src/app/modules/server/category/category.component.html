@@ -1,1 +1,44 @@
-<p>category works!</p>
+<div class="header">
+  <h1>Categories</h1>
+  <p>Manage your categories here.</p>
+</div>
+<app-card>
+  <h1>Categories</h1>
+  <cdk-accordion>
+    <cdk-accordion-item
+      *ngFor="let category of categories; let index = index; trackBy: trackByFn"
+      #accordionItem="cdkAccordionItem"
+      role="button"
+      tabindex="0"
+      [attr.id]="'accordion-header-' + index"
+      [attr.aria-expanded]="accordionItem.expanded"
+      [attr.aria-controls]="'accordion-body-' + index"
+    >
+      <app-card-row>
+        <div (click)="accordionItem.toggle()">
+          <label class="card-row-title" card
+            >{{ category.name }}
+            <mat-icon>
+              {{
+                accordionItem.expanded
+                  ? "keyboard_arrow_down"
+                  : "keyboard_arrow_left"
+              }}
+            </mat-icon>
+          </label>
+          <p class="card-row-description">
+            Change the settings for {{ category.name }} here.
+          </p>
+        </div>
+        <div
+          role="region"
+          [style.display]="accordionItem.expanded ? '' : 'none'"
+          [attr.id]="'accordion-body-' + index"
+          [attr.aria-labelledby]="'accordion-header-' + index"
+        >
+          <app-category-form [category]="category"></app-category-form>
+        </div>
+      </app-card-row>
+    </cdk-accordion-item>
+  </cdk-accordion>
+</app-card>

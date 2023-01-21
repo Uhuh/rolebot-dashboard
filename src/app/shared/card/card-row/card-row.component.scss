@@ -10,9 +10,13 @@
 }
 
 .card-row-title {
+  display: flex;
+  align-content: center;
+  user-select: none;
   font-size: clamp(18px, 2vw, 22px);
 }
 
 .card-row-description {
   color: var(--off-white);
+  user-select: none;
 }

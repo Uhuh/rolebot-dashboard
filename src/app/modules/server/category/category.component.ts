@@ -28,10 +28,17 @@ export class CategoryComponent implements OnDestroy {
           return this.apiService.getGuildCategories(guildId);
         })
       )
-      .subscribe((categories) => (this.categories = categories));
+      .subscribe((categories) => {
+        console.log(categories);
+        this.categories = categories;
+      });
   }
 
   ngOnDestroy(): void {
     this.destroyed$.next();
+  }
+
+  trackByFn(index: number, category: ICategory) {
+    return category.id;
   }
 }
