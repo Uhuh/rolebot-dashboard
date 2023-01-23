@@ -35,6 +35,18 @@ export class ApiService {
     );
   }
 
+  updateCategory(guildId: string, category: ICategory): Observable<ICategory> {
+    return this.http.post<ICategory>(
+      `${this.apiUrl}/Category/Update`,
+      { ...category },
+      {
+        headers: this.headers,
+        withCredentials: true,
+        params: { guildId },
+      }
+    );
+  }
+
   getGuildReactRoles(guildId: string): Observable<Array<IReactRole>> {
     return this.http.get<Array<IReactRole>>(
       `${this.apiUrl}/ReactRole/GetGuildRoles`,
@@ -47,11 +59,26 @@ export class ApiService {
   }
 
   getGuildConfig(guildId: string): Observable<IGuildConfig> {
-    return this.http.get<IGuildConfig>(`${this.apiUrl}/Guild/GetConfig`, {
+    return this.http.get<IGuildConfig>(`${this.apiUrl}/Guild/Get`, {
       headers: this.headers,
       withCredentials: true,
       params: { guildId },
     });
+  }
+
+  updateConfig(
+    guildId: string,
+    config: IGuildConfig
+  ): Observable<IGuildConfig> {
+    return this.http.post<IGuildConfig>(
+      `${this.apiUrl}/Guild/Update`,
+      { ...config },
+      {
+        headers: this.headers,
+        withCredentials: true,
+        params: { guildId },
+      }
+    );
   }
 
   /**
