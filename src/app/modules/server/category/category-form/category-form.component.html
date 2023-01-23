@@ -1,7 +1,7 @@
-<ng-container [formGroup]="categoryGroup">
+<ng-container [formGroup]="categoryForm">
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <input matInput formControlName="name" />
+    <input matInput formControlName="name" required />
   </mat-form-field>
 
   <mat-form-field>
@@ -39,4 +39,13 @@
     </mat-checkbox>
     <p class="description"></p>
   </div>
+
+  <button
+    mat-raised-button
+    [disabled]="isPristine"
+    color="warn"
+    (click)="onSubmit()"
+  >
+    Save
+  </button>
 </ng-container>
