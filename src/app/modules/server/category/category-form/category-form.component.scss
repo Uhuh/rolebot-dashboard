@@ -8,3 +8,14 @@
   color: var(--off-white);
   padding-left: 10px;
 }
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  .save {
+    width: 100%;
+  }
+  .delete {
+    margin: 0;
+  }
+}

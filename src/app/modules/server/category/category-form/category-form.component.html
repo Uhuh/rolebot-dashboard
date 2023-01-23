@@ -40,12 +40,18 @@
     <p class="description"></p>
   </div>
 
-  <button
-    mat-raised-button
-    [disabled]="isPristine"
-    color="warn"
-    (click)="onSubmit()"
-  >
-    Save
-  </button>
+  <div class="buttons">
+    <button
+      mat-raised-button
+      [disabled]="isPristine"
+      class="save"
+      color="primary"
+      (click)="onSubmit()"
+    >
+      Save
+    </button>
+    <button mat-raised-button color="warn" (click)="onSubmit()">
+      <mat-icon class="delete">delete</mat-icon>
+    </button>
+  </div>
 </ng-container>
