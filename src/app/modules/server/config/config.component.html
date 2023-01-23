@@ -3,46 +3,51 @@
   <p>Decide how you want RoleBot to handle roles.</p>
 </div>
 <div class="wrapper">
-  <form>
-    <app-card>
-      <h1>Config</h1>
-      <app-card-row>
-        <label class="card-row-title">How to obtain roles</label>
-        <p class="card-row-description">
-          Choose whether to use reactions or buttons to get roles.
-        </p>
-        <mat-radio-group
-          aria-labelledby="radio-group-label"
-          [(ngModel)]="configType"
-          name="configType"
-        >
-          <mat-radio-button
-            [color]="'primary'"
-            *ngFor="let type of types"
-            [value]="type.value"
-          >
-            {{ type.label }}
-          </mat-radio-button>
-        </mat-radio-group>
-      </app-card-row>
-      <app-card-row>
-        <label class="card-row-title">Hide emojis</label>
-        <p class="card-row-description">
-          Choose whether to hide emojis when using the button view.
-        </p>
-        <mat-checkbox
+  <app-card [formGroup]="configForm">
+    <h1>Config</h1>
+    <app-card-row>
+      <label class="card-row-title">How to obtain roles</label>
+      <p class="card-row-description">
+        Choose whether to use reactions or buttons to get roles.
+      </p>
+      <mat-radio-group
+        aria-labelledby="radio-group-label"
+        formControlName="reactType"
+        name="configType"
+      >
+        <mat-radio-button
           [color]="'primary'"
-          [(ngModel)]="hideEmojis"
-          name="hideEmojis"
-          [disabled]="disableHideEmojis"
+          *ngFor="let type of types"
+          [value]="type.value"
         >
-          Hide emojis?
-        </mat-checkbox>
-      </app-card-row>
-    </app-card>
-  </form>
+          {{ type.label }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </app-card-row>
+    <app-card-row>
+      <label class="card-row-title">Hide emojis</label>
+      <p class="card-row-description">
+        Choose whether to hide emojis when using the button view.
+      </p>
+      <mat-checkbox
+        [color]="'primary'"
+        formControlName="hideEmojis"
+        name="hideEmojis"
+      >
+        Hide emojis?
+      </mat-checkbox>
+    </app-card-row>
+    <button
+      mat-raised-button
+      [disabled]="isPristine"
+      color="warn"
+      (click)="onSubmit()"
+    >
+      Save
+    </button>
+  </app-card>
   <app-discord
-    [type]="configType"
+    [type]="reactType"
     [hideEmojis]="hideEmojis ?? false"
   ></app-discord>
 </div>

@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ConfigComponent } from './config.component';
 import { CardModule } from 'src/app/shared/card/card.module';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DiscordModule } from 'src/app/shared/discord/discord.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [ConfigComponent],
@@ -15,8 +17,10 @@ import { DiscordModule } from 'src/app/shared/discord/discord.module';
     CardModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatButtonModule,
+    MatSnackBarModule,
     DiscordModule,
-    FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     RouterModule.forChild([
       {
