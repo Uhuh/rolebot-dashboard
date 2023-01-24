@@ -55,14 +55,6 @@ export class ConfigComponent implements OnDestroy {
           hideEmojis: config.hideEmojis,
         });
       });
-
-    this.configForm.valueChanges
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(() => {
-        const hideEmojis = this.configForm.get('hideEmojis');
-        if (this.isReaction && !hideEmojis?.disabled) hideEmojis?.disable();
-        else if (this.isButton && hideEmojis?.disabled) hideEmojis.enable();
-      });
   }
 
   get isPristine() {
@@ -92,8 +84,6 @@ export class ConfigComponent implements OnDestroy {
       ...this.config,
       ...this.configForm.value,
     };
-
-    console.log(this.config);
 
     if (!this.config || this.configForm.invalid) {
       return this.snackbar.open('Invalid form!', 'Dismiss', {

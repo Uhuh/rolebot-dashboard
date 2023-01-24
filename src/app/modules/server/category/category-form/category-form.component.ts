@@ -14,8 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subject, takeUntil } from 'rxjs';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { Subject } from 'rxjs';
 import { DisplayType, ICategory } from 'src/app/shared/types/interfaces';
 
 @Component({
@@ -27,13 +26,12 @@ export class CategoryFormComponent implements OnChanges, OnDestroy {
   private readonly destroyed$ = new Subject<void>();
 
   @Input() category!: ICategory;
-  @Output() categoryChange = new EventEmitter<ICategory>();
+  @Output() updatedCategory = new EventEmitter<ICategory>();
 
   categoryForm: FormGroup;
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly apiService: ApiService,
     private readonly snackBar: MatSnackBar
   ) {
     this.categoryForm = this.fb.group({
@@ -48,7 +46,6 @@ export class CategoryFormComponent implements OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     const { category } = changes;
-    console.log(category);
     if (category) {
       const value = category.currentValue as ICategory;
 
@@ -92,14 +89,7 @@ export class CategoryFormComponent implements OnChanges, OnDestroy {
         : this.category.displayOrder,
     };
 
-    return this.apiService
-      .updateCategory(this.category.guildId, updatedCategory)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((category) => {
-        this.snackBar.open(`Successfully updated category!`, 'Ok', {
-          panelClass: 'app-notification-success',
-        });
-        this.categoryForm.markAsPristine();
-      });
+    this.categoryForm.markAsPristine();
+    return this.updatedCategory.emit(updatedCategory);
   }
 }

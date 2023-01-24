@@ -2,7 +2,7 @@
 
 @include mat.core();
 
-$my-app-primary: mat.define-palette(mat.$deep-orange-palette);
+$my-app-primary: mat.define-palette(mat.$teal-palette);
 $my-app-accent: mat.define-palette(mat.$grey-palette, A200, A100, A400);
 $my-app-warn: mat.define-palette(mat.$red-palette);
 
@@ -144,4 +144,8 @@ a {
   &.app-notification-success {
     --mdc-snackbar-container-color: #43a446;
   }
+}
+
+.discord-action-row {
+  flex-wrap: wrap;
 }

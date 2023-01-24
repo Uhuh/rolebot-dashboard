@@ -4,8 +4,13 @@
 </div>
 <app-card>
   <h1>Categories</h1>
-  <button mat-raised-button color="accent" matTooltip="Create a new category">
-    <mat-icon>add</mat-icon>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openDialog()"
+    matTooltip="Create a new category"
+  >
+    Create<mat-icon>add</mat-icon>
   </button>
   <cdk-accordion>
     <cdk-accordion-item
@@ -39,7 +44,10 @@
           [attr.id]="'accordion-body-' + index"
           [attr.aria-labelledby]="'accordion-header-' + index"
         >
-          <app-category-form [category]="category"></app-category-form>
+          <app-category-form
+            [category]="category"
+            (updatedCategory)="updateCategory($event)"
+          ></app-category-form>
         </div>
       </app-card-row>
     </cdk-accordion-item>
