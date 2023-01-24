@@ -1,0 +1,11 @@
+<app-card>
+  <h1>Create a new category</h1>
+  <app-card-row>
+    <label class="card-row-title">New category</label>
+    <p class="card-row-description"></p>
+    <app-category-form
+      [category]="defaultCategory"
+      (updatedCategory)="createCategory($event)"
+    ></app-category-form>
+  </app-card-row>
+</app-card>
