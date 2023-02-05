@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DiscordModule } from 'src/app/shared/discord/discord.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { GuildService } from '../server.service';
 
 @NgModule({
   declarations: [ConfigComponent],
@@ -29,6 +30,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       },
     ]),
   ],
+  providers: [GuildService],
   exports: [ConfigComponent],
 })
 export class ConfigModule {}
