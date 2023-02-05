@@ -5,6 +5,18 @@ import {
   IReactRole,
 } from 'src/app/shared/types/interfaces';
 
+export const updateGuildId = createAction(
+  '[ GuildState ] Updating id',
+  props<{ guildId: string }>()
+);
+export const addCategory = createAction(
+  '[ GuildState ] Adding category',
+  props<{ category: ICategory }>()
+);
+export const removeCategory = createAction(
+  '[ GuildState ] Removing category',
+  props<{ category: ICategory }>()
+);
 export const updateCategory = createAction(
   '[ GuildState ] Updating category',
   props<{ category: ICategory }>()

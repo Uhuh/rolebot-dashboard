@@ -1,14 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
 import { GuildReactType } from 'src/app/shared/types/interfaces';
 import {
+  addCategory,
+  removeCategory,
   updateCategories,
   updateCategory,
   updateConfig,
+  updateGuildId,
   updateReactRoles,
 } from './server.actions';
 import { GuildState } from './server.model';
 
 const initialState: GuildState = {
+  guildId: '0',
   config: {
     guildId: '-1',
     hideEmojis: false,
@@ -21,6 +25,35 @@ const initialState: GuildState = {
 
 export const guildReducer = createReducer(
   initialState,
+  on(updateGuildId, (state, { guildId }) => ({
+    ...state,
+    guildId,
+  })),
+  on(addCategory, (state, { category }) => ({
+    ...state,
+    categories: [...state.categories, category],
+  })),
+  on(removeCategory, (state, { category }) => {
+    const categoryToDelete = state.categories.find((c) => c.id === category.id);
+
+    if (!categoryToDelete) {
+      return { ...state };
+    }
+
+    const index = state.categories.indexOf(categoryToDelete);
+
+    if (index < 0) {
+      return { ...state };
+    }
+
+    const categories = [...state.categories];
+    categories.splice(index, 1);
+
+    return {
+      ...state,
+      categories,
+    };
+  }),
   on(updateCategory, (state, { category }) => {
     const oldCategory = state.categories.find((c) => c.id === category.id);
 

@@ -13,9 +13,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { DisplayType, ICategory } from 'src/app/shared/types/interfaces';
+import { GuildService } from '../../server.service';
 
 @Component({
   selector: 'app-category-form',
@@ -23,7 +25,7 @@ import { DisplayType, ICategory } from 'src/app/shared/types/interfaces';
   styleUrls: ['./category-form.component.scss'],
 })
 export class CategoryFormComponent implements OnChanges, OnDestroy {
-  private readonly destroyed$ = new Subject<void>();
+  private readonly destroyed = new Subject<void>();
 
   @Input() category!: ICategory;
   @Output() updatedCategory = new EventEmitter<ICategory>();
@@ -32,7 +34,8 @@ export class CategoryFormComponent implements OnChanges, OnDestroy {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly snackBar: MatSnackBar
+    private readonly snackbar: MatSnackBar,
+    private readonly guildService: GuildService
   ) {
     this.categoryForm = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(1)]),
@@ -61,7 +64,7 @@ export class CategoryFormComponent implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroyed$.next();
+    this.destroyed.next();
   }
 
   get isPristine() {
@@ -72,9 +75,15 @@ export class CategoryFormComponent implements OnChanges, OnDestroy {
     return this.categoryForm.valid;
   }
 
+  openDialog() {}
+
+  removeCategory() {
+    this.guildService.deleteCategory(this.category.guildId, this.category);
+  }
+
   onSubmit() {
     if (!this.isValid) {
-      return this.snackBar.open('Invalid form!', 'Dismiss', {
+      return this.snackbar.open('Invalid form!', 'Dismiss', {
         politeness: 'assertive',
         panelClass: 'app-notification-error',
       });

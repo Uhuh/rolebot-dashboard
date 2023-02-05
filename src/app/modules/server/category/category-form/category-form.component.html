@@ -46,11 +46,18 @@
       [disabled]="isPristine"
       class="save"
       color="primary"
+      type="submit"
       (click)="onSubmit()"
     >
       Save
     </button>
-    <button mat-raised-button color="warn" (click)="onSubmit()">
+    <button
+      mat-raised-button
+      color="warn"
+      type="button"
+      (click)="removeCategory()"
+      *ngIf="category.id > 0"
+    >
       <mat-icon class="delete">delete</mat-icon>
     </button>
   </div>
