@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ServersComponent } from './servers.component';
 import { RouterModule } from '@angular/router';
 import { ServerCardModule } from './server-card/server-card.module';
+import { ApiService } from 'src/app/shared/services/api.service';
 
 @NgModule({
   declarations: [ServersComponent],
@@ -12,6 +13,7 @@ import { ServerCardModule } from './server-card/server-card.module';
     ServerCardModule,
     RouterModule.forChild([{ path: '', component: ServersComponent }]),
   ],
+  providers: [ApiService],
   exports: [ServersComponent],
 })
 export class ServersModule {}

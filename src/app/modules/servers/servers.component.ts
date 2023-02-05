@@ -11,7 +11,7 @@ import { IGuild } from 'src/app/shared/types/interfaces';
   styleUrls: ['./servers.component.scss'],
 })
 export class ServersComponent implements OnDestroy {
-  private readonly destroyed$ = new Subject<void>();
+  private readonly destroyed = new Subject<void>();
   isFresh = false;
   guilds: IGuild[] = [];
 
@@ -22,14 +22,14 @@ export class ServersComponent implements OnDestroy {
     private readonly apiService: ApiService
   ) {
     this.route.queryParams
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(takeUntil(this.destroyed))
       .subscribe(async (params) => {
         // if the code param is invalid then the jwt is probably already set.
         if (!params['code']) return;
 
         this.apiService
           .authorizeUser(params['code'])
-          .pipe(takeUntil(this.destroyed$))
+          .pipe(takeUntil(this.destroyed))
           .subscribe(() => {
             this.jwtService.updateJwtToken();
             this.router.navigate(['/servers']);
@@ -37,7 +37,7 @@ export class ServersComponent implements OnDestroy {
       });
 
     combineLatest([this.jwtService.guilds$, this.jwtService.isFresh$])
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(takeUntil(this.destroyed))
       .subscribe(([guilds, isFresh]) => {
         this.guilds = guilds ?? [];
         this.isFresh = !!isFresh;
@@ -45,6 +45,6 @@ export class ServersComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroyed$.next();
+    this.destroyed.next();
   }
 }
