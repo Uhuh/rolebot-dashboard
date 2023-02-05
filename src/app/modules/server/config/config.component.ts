@@ -1,10 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
-import { map, of, Subject, switchMap, takeUntil } from 'rxjs';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { Subject, takeUntil } from 'rxjs';
 import { GuildReactType, IGuildConfig } from 'src/app/shared/types/interfaces';
+import { GuildService } from '../server.service';
 
 @Component({
   selector: 'app-config',
@@ -12,7 +11,7 @@ import { GuildReactType, IGuildConfig } from 'src/app/shared/types/interfaces';
   styleUrls: ['./config.component.scss'],
 })
 export class ConfigComponent implements OnDestroy {
-  private readonly destroyed$ = new Subject<void>();
+  private readonly destroyed = new Subject<void>();
   config?: IGuildConfig;
   configForm: FormGroup;
 
@@ -22,8 +21,7 @@ export class ConfigComponent implements OnDestroy {
   ];
 
   constructor(
-    private readonly route: ActivatedRoute,
-    private readonly apiService: ApiService,
+    private readonly guildService: GuildService,
     private readonly fb: FormBuilder,
     private readonly snackbar: MatSnackBar
   ) {
@@ -32,17 +30,8 @@ export class ConfigComponent implements OnDestroy {
       hideEmojis: new FormControl(false),
     });
 
-    this.route.queryParams
-      .pipe(
-        takeUntil(this.destroyed$),
-        switchMap((params) => {
-          const guildId = params['guildId'];
-
-          if (!guildId) return of(null);
-
-          return this.apiService.getGuildConfig(guildId);
-        })
-      )
+    this.guildService.config$
+      .pipe(takeUntil(this.destroyed))
       .subscribe((config) => {
         if (!config) {
           return console.error(`Guild config missing.`);
@@ -91,19 +80,12 @@ export class ConfigComponent implements OnDestroy {
       });
     }
 
-    return this.apiService
-      .updateConfig(this.config?.guildId, updatedConfig)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((config) => {
-        this.snackbar.open(`Successfully updated config!`, 'Ok', {
-          panelClass: 'app-notification-success',
-        });
-
-        this.configForm.markAsPristine();
-      });
+    return this.guildService.updateConfig(updatedConfig).add(() => {
+      this.configForm.markAsPristine();
+    });
   }
 
   ngOnDestroy(): void {
-    this.destroyed$.next();
+    this.destroyed.next();
   }
 }
