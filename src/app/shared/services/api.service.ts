@@ -22,14 +22,16 @@ export class ApiService {
     });
   }
 
+  options = (params: Record<string, string>) => ({
+    headers: this.headers,
+    withCredentials: true,
+    params,
+  });
+
   getGuildCategories(guildId: string): Observable<Array<ICategory>> {
     return this.http.get<Array<ICategory>>(
       `${this.apiUrl}/Category/GetGuildCategories`,
-      {
-        headers: this.headers,
-        withCredentials: true,
-        params: { guildId },
-      }
+      this.options({ guildId })
     );
   }
 
@@ -37,31 +39,37 @@ export class ApiService {
     return this.http.post<ICategory>(
       `${this.apiUrl}/Category/Update`,
       { ...category },
-      {
-        headers: this.headers,
-        withCredentials: true,
-        params: { guildId },
-      }
+      this.options({ guildId })
+    );
+  }
+
+  createCategory(guildId: string, category: ICategory): Observable<ICategory> {
+    return this.http.put<ICategory>(
+      `${this.apiUrl}/Category/Create`,
+      { ...category },
+      this.options({ guildId })
+    );
+  }
+
+  deleteCategory(guildId: string, categoryId: string): Observable<ICategory> {
+    return this.http.delete<ICategory>(
+      `${this.apiUrl}/Category/Delete`,
+      this.options({ guildId, categoryId })
     );
   }
 
   getGuildReactRoles(guildId: string): Observable<Array<IReactRole>> {
     return this.http.get<Array<IReactRole>>(
       `${this.apiUrl}/Role/GetGuildRoles`,
-      {
-        headers: this.headers,
-        withCredentials: true,
-        params: { guildId },
-      }
+      this.options({ guildId })
     );
   }
 
   getGuildConfig(guildId: string): Observable<IGuildConfig> {
-    return this.http.get<IGuildConfig>(`${this.apiUrl}/Guild/Get`, {
-      headers: this.headers,
-      withCredentials: true,
-      params: { guildId },
-    });
+    return this.http.get<IGuildConfig>(
+      `${this.apiUrl}/Guild/Get`,
+      this.options({ guildId })
+    );
   }
 
   updateConfig(
@@ -71,11 +79,7 @@ export class ApiService {
     return this.http.post<IGuildConfig>(
       `${this.apiUrl}/Guild/Update`,
       { ...config },
-      {
-        headers: this.headers,
-        withCredentials: true,
-        params: { guildId },
-      }
+      this.options({ guildId })
     );
   }
 
