@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subject, takeUntil } from 'rxjs';
+import { of, Subject, switchMap, takeUntil } from 'rxjs';
 import { ICategory } from 'src/app/shared/types/interfaces';
 import { GuildService } from '../server.service';
 import { CategoryCreateComponent } from './category-create/category-create.component';
@@ -12,8 +12,9 @@ import { CategoryCreateComponent } from './category-create/category-create.compo
   styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnDestroy {
-  private guildId?: string;
   private readonly destroyed = new Subject<void>();
+
+  guildId?: string;
   categories: ICategory[] = [];
 
   constructor(
@@ -25,6 +26,10 @@ export class CategoryComponent implements OnDestroy {
       .subscribe((categories) => {
         this.categories = categories;
       });
+
+    this.guildService.guildId$
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((guildId) => (this.guildId = guildId));
   }
 
   ngOnDestroy(): void {
@@ -41,8 +46,16 @@ export class CategoryComponent implements OnDestroy {
     dialogRef
       .afterClosed()
       .pipe(takeUntil(this.destroyed))
-      .subscribe((result) => {
-        console.log(result);
+      .subscribe((newCategory) => {
+        if (!this.guildId) {
+          console.error('Missing guildId');
+
+          return of(null);
+        }
+
+        newCategory.guildId = this.guildId;
+
+        return this.guildService.createCategory(this.guildId, newCategory);
       });
   }
 

@@ -22,7 +22,6 @@ import { GuildService } from '../server.service';
     MatSnackBarModule,
     DiscordModule,
     ReactiveFormsModule,
-    RouterModule,
     RouterModule.forChild([
       {
         path: '',
@@ -31,6 +30,5 @@ import { GuildService } from '../server.service';
     ]),
   ],
   providers: [GuildService],
-  exports: [ConfigComponent],
 })
 export class ConfigModule {}

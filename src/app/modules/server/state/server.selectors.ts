@@ -4,6 +4,10 @@ import { GuildState } from './server.model';
 export const _selectGuildDetails =
   createFeatureSelector<Readonly<GuildState>>('guildDetails');
 
+export const selectGuildId = createSelector(
+  _selectGuildDetails,
+  (state) => state.guildId
+);
 export const selectGuildConfig = createSelector(
   _selectGuildDetails,
   (state) => state.config

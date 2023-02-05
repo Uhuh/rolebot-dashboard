@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Store } from '@ngrx/store';
+import { ActionCreator, Store } from '@ngrx/store';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ICategory, IGuildConfig } from 'src/app/shared/types/interfaces';
-import { updateCategory, updateConfig } from './state/server.actions';
+import {
+  addCategory,
+  removeCategory,
+  updateCategory,
+  updateConfig,
+} from './state/server.actions';
 import {
   selectGuildCategories,
   selectGuildConfig,
+  selectGuildId,
   selectGuildReactRoles,
 } from './state/server.selectors';
 
 @Injectable()
 export class GuildService {
+  public readonly guildId$ = this.store.select(selectGuildId);
   public readonly config$ = this.store.select(selectGuildConfig);
   public readonly categories$ = this.store.select(selectGuildCategories);
   public readonly reactRoles$ = this.store.select(selectGuildReactRoles);
@@ -22,24 +29,25 @@ export class GuildService {
     private readonly snackbar: MatSnackBar
   ) {}
 
+  private snackbarMessage = (
+    message: string,
+    type: 'success' | 'error' = 'success'
+  ) =>
+    this.snackbar.open(message, 'Dismiss', {
+      panelClass: `app-notification-${type}`,
+    });
+
   updateConfig(config: IGuildConfig) {
     return this.apiService.updateConfig(config.guildId, config).subscribe({
       next: (config) => {
         this.store.dispatch(updateConfig({ config }));
-
-        this.snackbar.open(`Successfully updated config!`, 'Ok', {
-          panelClass: 'app-notification-success',
-        });
+        this.snackbarMessage('Successfully updated config!');
       },
-      error: () => {
-        this.snackbar.open(
-          `There was an issue updating your config...`,
-          'Dismiss',
-          {
-            panelClass: 'app-notification-error',
-          }
-        );
-      },
+      error: () =>
+        this.snackbarMessage(
+          'There was an issue updating your config...',
+          'error'
+        ),
     });
   }
 
@@ -49,16 +57,32 @@ export class GuildService {
       .subscribe({
         next: (category) => {
           this.store.dispatch(updateCategory({ category }));
-
-          this.snackbar.open(`Successfully updated category!`, 'Ok', {
-            panelClass: 'app-notification-success',
-          });
+          this.snackbarMessage('Successfully updated category!');
         },
-        error: () => {
-          this.snackbar.open(`Issues updating your category...`, 'Dismiss', {
-            panelClass: 'app-notification-error',
-          });
-        },
+        error: () =>
+          this.snackbarMessage('Issues updating your category...', 'error'),
       });
+  }
+
+  createCategory(guildId: string, category: ICategory) {
+    return this.apiService.createCategory(guildId, category).subscribe({
+      next: (category) => {
+        this.store.dispatch(addCategory({ category }));
+        this.snackbarMessage('Successfully created the category!');
+      },
+      error: () =>
+        this.snackbarMessage('Failed to create the category...', 'error'),
+    });
+  }
+
+  deleteCategory(guildId: string, category: ICategory) {
+    return this.apiService.deleteCategory(guildId, `${category.id}`).subscribe({
+      next: (category) => {
+        this.store.dispatch(removeCategory({ category }));
+        this.snackbarMessage('Successfully deleted the category!');
+      },
+      error: () =>
+        this.snackbarMessage('Failed to delete the category...', 'error'),
+    });
   }
 }

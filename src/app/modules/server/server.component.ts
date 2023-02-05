@@ -8,6 +8,7 @@ import { IGuild } from 'src/app/shared/types/interfaces';
 import {
   updateCategories,
   updateConfig,
+  updateGuildId,
   updateReactRoles,
 } from './state/server.actions';
 import { GuildState } from './state/server.model';
@@ -42,6 +43,8 @@ export class ServerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (!this.guild?.id) return console.error('Guild not defined.');
+
+    this.store.dispatch(updateGuildId({ guildId: this.guild.id }));
 
     this.apiService
       .getGuildConfig(this.guild?.id)

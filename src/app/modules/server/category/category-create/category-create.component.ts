@@ -27,7 +27,6 @@ export class CategoryCreateComponent {
   }
 
   createCategory(category: ICategory) {
-    console.log(category);
-    //this.dialogRef.close();
+    this.dialogRef.close(category);
   }
 }

@@ -26,7 +26,6 @@ import { GuildService } from '../server.service';
     MatDialogModule,
     MatButtonModule,
     MatTooltipModule,
-    RouterModule,
     RouterModule.forChild([
       {
         path: '',
@@ -35,6 +34,5 @@ import { GuildService } from '../server.service';
     ]),
   ],
   providers: [GuildService],
-  exports: [CategoryComponent],
 })
 export class CategoryModule {}
