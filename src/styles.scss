@@ -149,3 +149,7 @@ a {
 .discord-action-row {
   flex-wrap: wrap;
 }
+
+.mat-body p, .mat-body-2 p, .mat-typography .mat-body p, .mat-typography .mat-body-2 p, .mat-typography p {
+  margin: 0;
+}
