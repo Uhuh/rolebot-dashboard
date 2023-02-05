@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ServerComponent } from './server.component';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'src/app/shared/card/card.module';
+import { ApiService } from 'src/app/shared/services/api.service';
 
 @NgModule({
   declarations: [ServerComponent],
@@ -31,6 +32,7 @@ import { CardModule } from 'src/app/shared/card/card.module';
       },
     ]),
   ],
+  providers: [ApiService],
   exports: [ServerComponent],
 })
 export class ServerModule {}

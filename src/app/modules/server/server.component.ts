@@ -1,20 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { combineLatest, Subject, takeUntil } from 'rxjs';
+import { ApiService } from 'src/app/shared/services/api.service';
 import { JwtService } from 'src/app/shared/services/jwtHandler.service';
-import { ICategory, IGuild } from 'src/app/shared/types/interfaces';
+import { IGuild } from 'src/app/shared/types/interfaces';
+import {
+  updateCategories,
+  updateConfig,
+  updateReactRoles,
+} from './state/server.actions';
+import { GuildState } from './state/server.model';
 
 @Component({
   selector: 'app-server',
   templateUrl: './server.component.html',
   styleUrls: ['./server.component.scss'],
 })
-export class ServerComponent implements OnInit {
+export class ServerComponent implements OnInit, OnDestroy {
+  private readonly destroyed = new Subject<void>();
   guild?: IGuild;
-  categories: ICategory[] = [];
 
   constructor(
     private readonly jwtHandler: JwtService,
+    private readonly store: Store<GuildState>,
+    private readonly apiService: ApiService,
     private readonly route: ActivatedRoute,
     private readonly router: Router
   ) {
@@ -30,5 +40,34 @@ export class ServerComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    if (!this.guild?.id) return console.error('Guild not defined.');
+
+    this.apiService
+      .getGuildConfig(this.guild?.id)
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((config) => this.store.dispatch(updateConfig({ config })));
+
+    this.apiService
+      .getGuildCategories(this.guild?.id)
+      .pipe(takeUntil(this.destroyed))
+      .subscribe({
+        next: (categories) =>
+          this.store.dispatch(updateCategories({ categories })),
+        error: () => this.store.dispatch(updateCategories({ categories: [] })),
+      });
+
+    this.apiService
+      .getGuildReactRoles(this.guild?.id)
+      .pipe(takeUntil(this.destroyed))
+      .subscribe({
+        next: (reactRoles) =>
+          this.store.dispatch(updateReactRoles({ reactRoles })),
+        error: () => this.store.dispatch(updateReactRoles({ reactRoles: [] })),
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed.next();
+  }
 }
