@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CategoryCreateModule } from './category-create/category-create.module';
+import { GuildService } from '../server.service';
 
 @NgModule({
   declarations: [CategoryComponent],
@@ -33,6 +34,7 @@ import { CategoryCreateModule } from './category-create/category-create.module';
       },
     ]),
   ],
+  providers: [GuildService],
   exports: [CategoryComponent],
 })
 export class CategoryModule {}

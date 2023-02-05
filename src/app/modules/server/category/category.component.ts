@@ -1,10 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
-import { of, Subject, switchMap, takeUntil } from 'rxjs';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { Subject, takeUntil } from 'rxjs';
 import { ICategory } from 'src/app/shared/types/interfaces';
+import { GuildService } from '../server.service';
 import { CategoryCreateComponent } from './category-create/category-create.component';
 
 @Component({
@@ -14,35 +13,22 @@ import { CategoryCreateComponent } from './category-create/category-create.compo
 })
 export class CategoryComponent implements OnDestroy {
   private guildId?: string;
-  private readonly destroyed$ = new Subject<void>();
+  private readonly destroyed = new Subject<void>();
   categories: ICategory[] = [];
 
   constructor(
-    private readonly apiService: ApiService,
-    private readonly route: ActivatedRoute,
-    private readonly snackBar: MatSnackBar,
+    private readonly guildService: GuildService,
     private readonly dialog: MatDialog
   ) {
-    this.route.queryParams
-      .pipe(
-        takeUntil(this.destroyed$),
-        switchMap((params) => {
-          const guildId = params['guildId'];
-
-          if (!guildId) return of([]);
-
-          this.guildId = guildId;
-
-          return this.apiService.getGuildCategories(guildId);
-        })
-      )
+    this.guildService.categories$
+      .pipe(takeUntil(this.destroyed))
       .subscribe((categories) => {
         this.categories = categories;
       });
   }
 
   ngOnDestroy(): void {
-    this.destroyed$.next();
+    this.destroyed.next();
   }
 
   openDialog() {
@@ -54,22 +40,14 @@ export class CategoryComponent implements OnDestroy {
 
     dialogRef
       .afterClosed()
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(takeUntil(this.destroyed))
       .subscribe((result) => {
         console.log(result);
       });
   }
 
   updateCategory(category: ICategory) {
-    console.log(category);
-    return this.apiService
-      .updateCategory(category.guildId, category)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(() => {
-        this.snackBar.open(`Successfully updated category!`, 'Ok', {
-          panelClass: 'app-notification-success',
-        });
-      });
+    return this.guildService.updateCategory(category);
   }
 
   trackByFn(index: number, category: ICategory) {
