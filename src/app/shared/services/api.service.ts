@@ -6,9 +6,7 @@ import { COOKIES } from '../tokens/cookies.token';
 import { LOCAL_STORAGE } from '../tokens/localStorage.token';
 import { ICategory, IGuildConfig, IReactRole } from '../types/interfaces';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ApiService {
   private readonly apiUrl = 'https://localhost:7013/api';
   private readonly headers: HttpHeaders;
@@ -49,7 +47,7 @@ export class ApiService {
 
   getGuildReactRoles(guildId: string): Observable<Array<IReactRole>> {
     return this.http.get<Array<IReactRole>>(
-      `${this.apiUrl}/ReactRole/GetGuildRoles`,
+      `${this.apiUrl}/Role/GetGuildRoles`,
       {
         headers: this.headers,
         withCredentials: true,
