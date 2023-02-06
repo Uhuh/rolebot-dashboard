@@ -153,3 +153,11 @@ a {
 .mat-body p, .mat-body-2 p, .mat-typography .mat-body p, .mat-typography .mat-body-2 p, .mat-typography p {
   margin: 0;
 }
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 6px;
+  border: 2px solid var(--white);
+
+  color: var(--off-white);
+  background-color: var(--secondary-color) !important;
+}

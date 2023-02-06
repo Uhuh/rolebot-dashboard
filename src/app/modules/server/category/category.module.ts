@@ -7,11 +7,11 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatIconModule } from '@angular/material/icon';
 import { CardRowModule } from 'src/app/shared/card/card-row/card-row.module';
 import { CategoryFormModule } from './category-form/category-form.module';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CategoryCreateModule } from './category-create/category-create.module';
 import { GuildService } from '../server.service';
+import { ConfirmModalModule } from 'src/app/shared/confirm-modal/confirm-modal.module';
 
 @NgModule({
   declarations: [CategoryComponent],
@@ -22,8 +22,8 @@ import { GuildService } from '../server.service';
     CardRowModule,
     CategoryFormModule,
     CategoryCreateModule,
+    ConfirmModalModule,
     CommonModule,
-    MatDialogModule,
     MatButtonModule,
     MatTooltipModule,
     RouterModule.forChild([

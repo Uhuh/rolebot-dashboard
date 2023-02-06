@@ -40,7 +40,6 @@ export class CategoryComponent implements OnDestroy {
     const dialogRef = this.dialog.open(CategoryCreateComponent, {
       minWidth: '350px',
       maxWidth: '500px',
-      data: { guildId: this.guildId },
     });
 
     dialogRef
@@ -48,9 +47,7 @@ export class CategoryComponent implements OnDestroy {
       .pipe(takeUntil(this.destroyed))
       .subscribe((newCategory) => {
         if (!this.guildId) {
-          console.error('Missing guildId');
-
-          return of(null);
+          return console.error('Missing guildId');
         }
 
         newCategory.guildId = this.guildId;

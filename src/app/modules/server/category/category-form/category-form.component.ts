@@ -15,7 +15,8 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { ConfirmModalComponent } from 'src/app/shared/confirm-modal/confirm-modal.component';
 import { DisplayType, ICategory } from 'src/app/shared/types/interfaces';
 import { GuildService } from '../../server.service';
 
@@ -35,7 +36,8 @@ export class CategoryFormComponent implements OnChanges, OnDestroy {
   constructor(
     private readonly fb: FormBuilder,
     private readonly snackbar: MatSnackBar,
-    private readonly guildService: GuildService
+    private readonly guildService: GuildService,
+    private readonly dialog: MatDialog
   ) {
     this.categoryForm = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(1)]),
@@ -78,7 +80,25 @@ export class CategoryFormComponent implements OnChanges, OnDestroy {
   openDialog() {}
 
   removeCategory() {
-    this.guildService.deleteCategory(this.category.guildId, this.category);
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      minWidth: '350px',
+      maxWidth: '400px',
+      data: {
+        message: `Are you sure you want to delete "${this.category.name}"?`,
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((confirmDelete) => {
+        if (confirmDelete) {
+          this.guildService.deleteCategory(
+            this.category.guildId,
+            this.category
+          );
+        }
+      });
   }
 
   onSubmit() {
