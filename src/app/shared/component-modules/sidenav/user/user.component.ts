@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { combineLatest } from 'rxjs';
-import { JwtService } from '../../services/jwtHandler.service';
+import { JwtService } from 'src/app/shared/services/jwtHandler.service';
 
 @Component({
   selector: 'app-user',
