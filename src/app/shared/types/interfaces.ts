@@ -52,3 +52,22 @@ export interface IGuild {
   icon: string;
   name: string;
 }
+
+export interface IGuildRole {
+  id: string;
+  name: string;
+  color: number;
+  position: number;
+  permissions: string;
+}
+
+export interface IGuildEmoji {
+  id: string;
+  name: string;
+  animated: boolean;
+}
+
+export interface IDiscordGuild {
+  roles: IGuildRole[];
+  emojis: IGuildEmoji[];
+}

@@ -72,6 +72,13 @@ export class ApiService {
     );
   }
 
+  getGuildInfo(guildId: string = ''): Observable<string> {
+    return this.http.get<string>(
+      `${this.apiUrl}/Guild/GetGuildInfo`,
+      this.options({ guildId })
+    );
+  }
+
   updateConfig(
     guildId: string,
     config: IGuildConfig
