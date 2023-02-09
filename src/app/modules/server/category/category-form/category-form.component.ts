@@ -16,7 +16,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
-import { ConfirmModalComponent } from 'src/app/shared/confirm-modal/confirm-modal.component';
+import { ConfirmModalComponent } from 'src/app/shared/component-modules/confirm-modal/confirm-modal.component';
 import { DisplayType, ICategory } from 'src/app/shared/types/interfaces';
 import { GuildService } from '../../server.service';
 

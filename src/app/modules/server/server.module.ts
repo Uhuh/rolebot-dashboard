@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServerComponent } from './server.component';
 import { RouterModule } from '@angular/router';
-import { CardModule } from 'src/app/shared/card/card.module';
+import { CardModule } from 'src/app/shared/component-modules/card/card.module';
 import { ApiService } from 'src/app/shared/services/api.service';
 
 @NgModule({
@@ -27,6 +27,11 @@ import { ApiService } from 'src/app/shared/services/api.service';
               import('./category/category.module').then(
                 (m) => m.CategoryModule
               ),
+          },
+          {
+            path: 'role',
+            loadChildren: () =>
+              import('./role/role.module').then((m) => m.RoleModule),
           },
         ],
       },
