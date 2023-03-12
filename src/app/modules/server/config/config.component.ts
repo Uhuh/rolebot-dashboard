@@ -12,6 +12,7 @@ import { GuildService } from '../server.service';
 })
 export class ConfigComponent implements OnDestroy {
   private readonly destroyed = new Subject<void>();
+  guildId?: string;
   config?: IGuildConfig;
   configForm: FormGroup;
 
@@ -44,6 +45,10 @@ export class ConfigComponent implements OnDestroy {
           hideEmojis: config.hideEmojis,
         });
       });
+
+    this.guildService.guildId$
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((guildId) => (this.guildId = guildId));
   }
 
   get isPristine() {
@@ -72,6 +77,7 @@ export class ConfigComponent implements OnDestroy {
     const updatedConfig = {
       ...this.config,
       ...this.configForm.value,
+      guildId: this.guildId,
     };
 
     if (!this.config || this.configForm.invalid) {

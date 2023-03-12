@@ -1,3 +1,30 @@
 <div class="card-row">
-  <ng-content></ng-content>
+  <cdk-accordion-item
+    #accordionItem="cdkAccordionItem"
+    role="button"
+    tabindex="0"
+    [attr.aria-expanded]="accordionItem.expanded"
+  >
+    <div (click)="accordionItem.toggle()">
+      <div class="card-row-title">
+        <ng-content select="[row-title]"></ng-content>
+        <mat-icon>
+          {{
+            accordionItem.expanded || expanded
+              ? "keyboard_arrow_down"
+              : "keyboard_arrow_left"
+          }}
+        </mat-icon>
+      </div>
+      <div class="card-row-description">
+        <ng-content select="[row-description]"></ng-content>
+      </div>
+    </div>
+    <div
+      role="region"
+      [style.display]="accordionItem.expanded || expanded ? '' : 'none'"
+    >
+      <ng-content select="[row-content]"></ng-content>
+    </div>
+  </cdk-accordion-item>
 </div>

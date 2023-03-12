@@ -5,12 +5,13 @@
 <div class="wrapper">
   <app-card [formGroup]="configForm">
     <h1>Config</h1>
-    <app-card-row>
-      <label class="card-row-title">How to obtain roles</label>
-      <p class="card-row-description">
+    <app-card-row [expanded]="true">
+      <label row-title>How to obtain roles</label>
+      <p row-description>
         Choose whether to use reactions or buttons to get roles.
       </p>
       <mat-radio-group
+        row-content
         aria-labelledby="radio-group-label"
         formControlName="reactType"
         name="configType"
@@ -24,12 +25,13 @@
         </mat-radio-button>
       </mat-radio-group>
     </app-card-row>
-    <app-card-row>
-      <label class="card-row-title">Hide emojis</label>
-      <p class="card-row-description">
+    <app-card-row [expanded]="true">
+      <label row-title>Hide emojis</label>
+      <p row-description>
         Choose whether to hide emojis when using the button view.
       </p>
       <mat-checkbox
+        row-content
         [color]="'primary'"
         formControlName="hideEmojis"
         name="hideEmojis"

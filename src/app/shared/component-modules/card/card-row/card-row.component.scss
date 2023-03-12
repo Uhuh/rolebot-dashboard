@@ -21,3 +21,11 @@
   user-select: none;
   padding-bottom: 10px;
 }
+
+cdk-accordion-item:hover {
+  cursor: pointer;
+}
+
+mat-icon {
+  margin-left: auto;
+}

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-card-row',
@@ -6,4 +6,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./card-row.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CardRowComponent {}
+export class CardRowComponent {
+  @Input() expanded?: boolean;
+}

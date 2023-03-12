@@ -59,8 +59,4 @@ export class CategoryComponent implements OnDestroy {
   updateCategory(category: ICategory) {
     return this.guildService.updateCategory(category);
   }
-
-  trackByFn(index: number, category: ICategory) {
-    return category.id;
-  }
 }

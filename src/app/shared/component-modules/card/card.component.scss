@@ -7,3 +7,9 @@
   border-radius: 6px;
   background-color: #00475E;
 }
+
+cdk-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

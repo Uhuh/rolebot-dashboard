@@ -12,44 +12,16 @@
   >
     Create<mat-icon>add</mat-icon>
   </button>
-  <cdk-accordion>
-    <cdk-accordion-item
-      *ngFor="let category of categories; let index = index; trackBy: trackByFn"
-      #accordionItem="cdkAccordionItem"
-      role="button"
-      tabindex="0"
-      [attr.id]="'accordion-header-' + index"
-      [attr.aria-expanded]="accordionItem.expanded"
-      [attr.aria-controls]="'accordion-body-' + index"
-    >
-      <app-card-row>
-        <div (click)="accordionItem.toggle()">
-          <label class="card-row-title" card
-            >{{ category.name }}
-            <mat-icon>
-              {{
-                accordionItem.expanded
-                  ? "keyboard_arrow_down"
-                  : "keyboard_arrow_left"
-              }}
-            </mat-icon>
-          </label>
-          <p class="card-row-description">
-            Change the settings for {{ category.name }} here.
-          </p>
-        </div>
-        <div
-          role="region"
-          [style.display]="accordionItem.expanded ? '' : 'none'"
-          [attr.id]="'accordion-body-' + index"
-          [attr.aria-labelledby]="'accordion-header-' + index"
-        >
-          <app-category-form
-            [category]="category"
-            (updatedCategory)="updateCategory($event)"
-          ></app-category-form>
-        </div>
-      </app-card-row>
-    </cdk-accordion-item>
-  </cdk-accordion>
+  <app-card-row *ngFor="let category of categories">
+    <label row-title>
+      {{ category.name }}
+    </label>
+    <p row-description>Change the settings for {{ category.name }} here.</p>
+
+    <app-category-form
+      [category]="category"
+      (updatedCategory)="updateCategory($event)"
+      row-content
+    ></app-category-form>
+  </app-card-row>
 </app-card>
