@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInceptor } from './shared/interceptors/http-interceptor';
-import { SidenavModule } from './shared/sidenav/sidenav.module';
+import { SidenavModule } from './shared/component-modules/sidenav/sidenav.module';
 import { COOKIES } from './shared/tokens/cookies.token';
 import { LOCAL_STORAGE } from './shared/tokens/localStorage.token';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
