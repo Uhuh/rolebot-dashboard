@@ -13,7 +13,6 @@ export interface Category {
   selector: 'app-role',
   templateUrl: './role.component.html',
   styleUrls: ['./role.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class RoleComponent implements OnDestroy {
   private readonly destroyed = new Subject<void>();

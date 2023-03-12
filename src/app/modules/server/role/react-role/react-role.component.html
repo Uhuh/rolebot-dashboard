@@ -1,6 +1,6 @@
-<div
-  class="twemoji"
-  *ngIf="!reactRole.emojiTag"
-  [innerHTML]="reactRole.emojiId | emoji"
-></div>
-<img *ngIf="reactRole.emojiTag" [src]="discordEmoji(reactRole.emojiId)" />
+<div *ngIf="!reactRole.emojiTag" [innerHTML]="reactRole.emojiId | emoji"></div>
+<img
+  *ngIf="reactRole.emojiTag"
+  [src]="discordEmoji(reactRole.emojiId)"
+  class="custom-emoji"
+/>
