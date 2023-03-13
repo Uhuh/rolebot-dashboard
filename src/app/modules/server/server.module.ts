@@ -14,15 +14,22 @@ import { ApiService } from 'src/app/shared/services/api.service';
     RouterModule.forChild([
       {
         path: '',
+        redirectTo: 'config',
+        pathMatch: 'full',
+      },
+      {
+        path: '',
         component: ServerComponent,
         children: [
           {
             path: 'config',
+            title: 'RoleBot - Server Config',
             loadChildren: () =>
               import('./config/config.module').then((m) => m.ConfigModule),
           },
           {
             path: 'category',
+            title: 'RoleBot - Server Categories',
             loadChildren: () =>
               import('./category/category.module').then(
                 (m) => m.CategoryModule
@@ -30,6 +37,7 @@ import { ApiService } from 'src/app/shared/services/api.service';
           },
           {
             path: 'role',
+            title: 'RoleBot - Server React Roles',
             loadChildren: () =>
               import('./role/role.module').then((m) => m.RoleModule),
           },

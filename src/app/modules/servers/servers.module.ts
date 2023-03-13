@@ -11,7 +11,13 @@ import { ApiService } from 'src/app/shared/services/api.service';
     CommonModule,
     RouterModule,
     ServerCardModule,
-    RouterModule.forChild([{ path: '', component: ServersComponent }]),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: ServersComponent,
+        title: 'RoleBot - Servers list',
+      },
+    ]),
   ],
   providers: [ApiService],
   exports: [ServersComponent],
