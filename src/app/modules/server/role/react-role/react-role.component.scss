@@ -1,7 +1,27 @@
-.custom-emoji {
-  height: 32px;
+.custom-emoji, .emoji {
+  height: 24px !important;
 }
 
-.emoji {
-  height: 32px !important;
+.custom-emoji {
+  border-radius: 4px;
+}
+
+.react-role-wrapper {
+  display: flex;
+  width: fit-content;
+  padding: 4px 5px;
+  gap: 10px;
+  border: 2px solid var(--secondary-light);
+  background-color: var(--third-light);
+  border-radius: 8px;
+}
+
+.react-role-name, .react-role-img div, .react-role-img img {
+  display: flex;
+  align-self: center;
+  font-size: 18px;
+}
+
+.react-role-name {
+  color: var(--off-white);
 }

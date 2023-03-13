@@ -1,6 +1,14 @@
-<div *ngIf="!reactRole.emojiTag" [innerHTML]="reactRole.emojiId | emoji"></div>
-<img
-  *ngIf="reactRole.emojiTag"
-  [src]="discordEmoji(reactRole.emojiId)"
-  class="custom-emoji"
-/>
+<div class="react-role-wrapper">
+  <div class="react-role-img">
+    <div
+      *ngIf="!reactRole.emojiTag"
+      [innerHTML]="reactRole.emojiId | emoji"
+    ></div>
+    <img
+      *ngIf="reactRole.emojiTag"
+      [src]="discordEmoji(reactRole.emojiId)"
+      class="custom-emoji"
+    />
+  </div>
+  <div class="react-role-name">@{{ reactRole.name }}</div>
+</div>
