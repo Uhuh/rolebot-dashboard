@@ -11,6 +11,7 @@
 
 .card-row-title {
   display: flex;
+  color: var(--white);
   align-content: center;
   user-select: none;
   font-size: clamp(18px, 2vw, 22px);
@@ -19,7 +20,19 @@
 .card-row-description {
   color: var(--off-white);
   user-select: none;
-  padding-bottom: 10px;
+}
+
+.card-row-content {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 5px;
+  padding-top: 10px;
+}
+
+textarea {
+  min-height: 100px;
+  max-height: 200px;
 }
 
 cdk-accordion-item:hover {
