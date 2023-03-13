@@ -4,7 +4,7 @@
 </div>
 <div class="wrapper">
   <app-card [formGroup]="configForm">
-    <h1>Config</h1>
+    <h1>Manage your servers configuration</h1>
     <app-card-row [expanded]="true">
       <label row-title>How to obtain roles</label>
       <p row-description>
@@ -30,14 +30,14 @@
       <p row-description>
         Choose whether to hide emojis when using the button view.
       </p>
-      <mat-checkbox
+      <mat-slide-toggle
         row-content
         [color]="'primary'"
         formControlName="hideEmojis"
         name="hideEmojis"
       >
         Hide emojis?
-      </mat-checkbox>
+      </mat-slide-toggle>
     </app-card-row>
     <button
       mat-raised-button

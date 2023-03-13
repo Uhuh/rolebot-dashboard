@@ -27,16 +27,15 @@
     </mat-select>
   </mat-form-field>
 
-  <div>
-    <mat-checkbox formControlName="mutuallyExclusive">
-      Mutually exclusive
-      <mat-icon
-        matTooltipPosition="above"
-        matTooltip="Enabling this will prevent users from obtaining more than one role from this category."
-      >
-        info
-      </mat-icon>
-    </mat-checkbox>
+  <div class="slider">
+    <mat-slide-toggle formControlName="mutuallyExclusive"> </mat-slide-toggle>
+    Mutually exclusive
+    <mat-icon
+      matTooltipPosition="above"
+      matTooltip="Enabling this will prevent users from obtaining more than one role from this category."
+    >
+      info
+    </mat-icon>
     <p class="description"></p>
   </div>
 
