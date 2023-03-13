@@ -2,12 +2,22 @@ import { createAction, props } from '@ngrx/store';
 import {
   ICategory,
   IGuildConfig,
+  IGuildEmoji,
+  IGuildRole,
   IReactRole,
 } from 'src/app/shared/types/interfaces';
 
 export const updateGuildId = createAction(
   '[ GuildState ] Updating id',
   props<{ guildId: string }>()
+);
+export const updateGuildRoles = createAction(
+  '[ GuildState ] Updating guild roles',
+  props<{ guildRoles: IGuildRole[] }>()
+);
+export const updateGuildEmojis = createAction(
+  '[ GuildState ] Updating guild emojis',
+  props<{ guildEmojis: IGuildEmoji[] }>()
 );
 export const addCategory = createAction(
   '[ GuildState ] Adding category',

@@ -8,6 +8,14 @@ export const selectGuildId = createSelector(
   _selectGuildDetails,
   (state) => state.guildId
 );
+export const selectGuildRoles = createSelector(
+  _selectGuildDetails,
+  (state) => state.guildRoles
+);
+export const selectGuildEmojis = createSelector(
+  _selectGuildDetails,
+  (state) => state.guildEmojis
+);
 export const selectGuildConfig = createSelector(
   _selectGuildDetails,
   (state) => state.config

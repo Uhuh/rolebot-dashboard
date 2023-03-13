@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActionCreator, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ICategory, IGuildConfig } from 'src/app/shared/types/interfaces';
 import {
@@ -14,11 +14,13 @@ import {
   selectGuildConfig,
   selectGuildId,
   selectGuildReactRoles,
+  selectGuildRoles,
 } from './state/server.selectors';
 
 @Injectable()
 export class GuildService {
   public readonly guildId$ = this.store.select(selectGuildId);
+  public readonly guildRoles$ = this.store.select(selectGuildRoles);
   public readonly config$ = this.store.select(selectGuildConfig);
   public readonly categories$ = this.store.select(selectGuildCategories);
   public readonly reactRoles$ = this.store.select(selectGuildReactRoles);

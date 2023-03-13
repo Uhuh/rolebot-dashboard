@@ -4,7 +4,12 @@ import { CookiesStatic } from 'js-cookie';
 import { map, Observable } from 'rxjs';
 import { COOKIES } from '../tokens/cookies.token';
 import { LOCAL_STORAGE } from '../tokens/localStorage.token';
-import { ICategory, IGuildConfig, IReactRole } from '../types/interfaces';
+import {
+  ICategory,
+  IGuild,
+  IGuildConfig,
+  IReactRole,
+} from '../types/interfaces';
 
 @Injectable()
 export class ApiService {
@@ -72,8 +77,8 @@ export class ApiService {
     );
   }
 
-  getGuildInfo(guildId: string = ''): Observable<string> {
-    return this.http.get<string>(
+  getGuildInfo(guildId: string = ''): Observable<IGuild> {
+    return this.http.get<IGuild>(
       `${this.apiUrl}/Guild/GetGuildInfo`,
       this.options({ guildId })
     );

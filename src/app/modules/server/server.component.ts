@@ -8,7 +8,9 @@ import { IGuild } from 'src/app/shared/types/interfaces';
 import {
   updateCategories,
   updateConfig,
+  updateGuildEmojis,
   updateGuildId,
+  updateGuildRoles,
   updateReactRoles,
 } from './state/server.actions';
 import { GuildState } from './state/server.model';
@@ -67,6 +69,16 @@ export class ServerComponent implements OnInit, OnDestroy {
         next: (reactRoles) =>
           this.store.dispatch(updateReactRoles({ reactRoles })),
         error: () => this.store.dispatch(updateReactRoles({ reactRoles: [] })),
+      });
+
+    this.apiService
+      .getGuildInfo(this.guild?.id)
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((guildInfo) => {
+        this.store.dispatch(updateGuildRoles({ guildRoles: guildInfo.roles }));
+        this.store.dispatch(
+          updateGuildEmojis({ guildEmojis: guildInfo.emojis })
+        );
       });
   }
 

@@ -51,6 +51,8 @@ export interface IGuild {
   id: string;
   icon: string;
   name: string;
+  roles: IGuildRole[];
+  emojis: IGuildEmoji[];
 }
 
 export interface IGuildRole {

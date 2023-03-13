@@ -13,6 +13,8 @@ import { GuildState } from './server.model';
 
 const initialState: GuildState = {
   guildId: '0',
+  guildRoles: [],
+  guildEmojis: [],
   config: {
     guildId: '-1',
     hideEmojis: false,
