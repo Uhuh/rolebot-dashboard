@@ -1,7 +1,9 @@
-import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { combineLatest, Subject, takeUntil } from 'rxjs';
 import { ICategory, IReactRole } from 'src/app/shared/types/interfaces';
 import { GuildService } from '../server.service';
+import { ReactRoleCreateComponent } from './react-role-create/react-role-create.component';
 
 export interface Category {
   name: string;
@@ -22,7 +24,10 @@ export class RoleComponent implements OnDestroy {
 
   data: Category[] = [];
 
-  constructor(private readonly guildService: GuildService) {
+  constructor(
+    private readonly guildService: GuildService,
+    private readonly dialog: MatDialog
+  ) {
     combineLatest([
       this.guildService.categories$,
       this.guildService.reactRoles$,
@@ -38,8 +43,28 @@ export class RoleComponent implements OnDestroy {
           reactRoles: this.reactRoles.filter((r) => r.categoryId === c.id),
         }));
 
-        console.log(this.data);
+        this.data.unshift({
+          id: -1,
+          name: 'React Roles without a category',
+          reactRoles: this.reactRoles.filter((r) => !r.categoryId),
+        });
       });
+  }
+
+  createReactRole() {
+    const dialogRef = this.dialog.open(ReactRoleCreateComponent, {
+      minWidth: '350px',
+      maxWidth: '500px',
+      data: {
+        categories: this.categories,
+        roles: [],
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((newReactRole) => {});
   }
 
   ngOnDestroy(): void {

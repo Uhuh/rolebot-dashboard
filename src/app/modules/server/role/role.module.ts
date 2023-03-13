@@ -11,6 +11,8 @@ import { CardModule } from 'src/app/shared/component-modules/card/card.module';
 import { CardRowModule } from 'src/app/shared/component-modules/card/card-row/card-row.module';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { ReactRoleModule } from './react-role/react-role.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactRoleCreateModule } from './react-role-create/react-role-create.module';
 
 @NgModule({
   declarations: [RoleComponent],
@@ -19,11 +21,13 @@ import { ReactRoleModule } from './react-role/react-role.module';
     CdkAccordionModule,
     CardModule,
     CardRowModule,
+    MatDialogModule,
     MatTreeModule,
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
     ReactRoleModule,
+    ReactRoleCreateModule,
     RouterModule.forChild([
       {
         path: '',
