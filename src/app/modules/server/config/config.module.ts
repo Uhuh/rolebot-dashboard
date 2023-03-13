@@ -5,7 +5,7 @@ import { CardModule } from 'src/app/shared/component-modules/card/card.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GuildService } from '../server.service';
@@ -17,7 +17,7 @@ import { DiscordModule } from 'src/app/shared/component-modules/discord/discord.
     CommonModule,
     CardModule,
     MatRadioModule,
-    MatCheckboxModule,
+    MatSlideToggleModule,
     MatButtonModule,
     MatSnackBarModule,
     DiscordModule,

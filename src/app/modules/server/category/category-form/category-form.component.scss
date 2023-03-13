@@ -1,5 +1,6 @@
 :host {
   display: flex;
+  width: 100%;
   flex-direction: column;
 }
 
@@ -17,5 +18,15 @@
   }
   .delete {
     margin: 0;
+  }
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  mat-icon {
+    margin-left: 10px;
   }
 }
