@@ -6,9 +6,19 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+  }
+}
 
-    .emoji-input {
-      max-width: 100px;
-    }
+.emoji-toggle {
+  margin-bottom: 10px;
+}
+
+.emoji-select-option {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  img {
+    height: 28px;
   }
 }
