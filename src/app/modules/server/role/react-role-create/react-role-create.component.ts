@@ -22,6 +22,7 @@ export interface DialogData {
 export class ReactRoleCreateComponent implements OnChanges {
   roleId = new FormControl('', [Validators.required]);
   emoji = new FormControl('', [Validators.required]);
+  categoryId = new FormControl('');
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public readonly data: DialogData,

@@ -1,9 +1,14 @@
 .react-create-inputs {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
 
-  mat-form-field:first-child {
-    max-width: 100px;
+  .react-role {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    .emoji-input {
+      max-width: 100px;
+    }
   }
 }

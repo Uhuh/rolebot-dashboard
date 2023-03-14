@@ -14,7 +14,9 @@
   </button>
   <app-card-row *ngFor="let category of data">
     <label row-title>
-      {{ category.name }} - ({{ category.reactRoles.length }} react roles)
+      {{ category.name }} - ({{ category.reactRoles.length }} react role{{
+        category.reactRoles.length > 1 ? "s" : ""
+      }})
     </label>
     <ng-container *ngFor="let rr of category.reactRoles" row-content>
       <app-react-role [reactRole]="rr"></app-react-role>
