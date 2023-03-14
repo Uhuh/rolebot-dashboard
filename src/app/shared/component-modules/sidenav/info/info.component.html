@@ -3,9 +3,21 @@
     <img src="assets/banners/rolebot-banner-white.png" />
   </a>
   <div class="links">
-    <a class="link" href="https://rolebot.gg" target="_blank">RoleBot</a>
-    <a class="link" [routerLink]="['servers']" *ngIf="isFresh">Servers</a>
-    <a class="link" routerLink="about">About</a>
-    <a class="link" routerLink="tutorial">Tutorial</a>
+    <a
+      class="link"
+      routerLinkActive="active"
+      href="https://rolebot.gg"
+      target="_blank"
+      >RoleBot</a
+    >
+    <a
+      class="link"
+      routerLinkActive="active"
+      [routerLink]="['servers']"
+      *ngIf="isFresh"
+      >Servers</a
+    >
+    <a class="link" routerLinkActive="active" routerLink="about">About</a>
+    <a class="link" routerLinkActive="active" routerLink="tutorial">Tutorial</a>
   </div>
 </div>

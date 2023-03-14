@@ -16,4 +16,11 @@
       height: 64px;
     }
   }
+
+  .active {
+    background-color: var(--third-light);
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+  }
 }

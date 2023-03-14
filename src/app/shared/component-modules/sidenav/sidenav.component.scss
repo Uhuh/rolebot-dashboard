@@ -6,7 +6,6 @@
 
   color: var(--secondary-light);
   font-size: 18px;
-  background-color: var(--secondary-dark);
 
   @media (max-width: 900px) {
     display: none;
@@ -71,4 +70,11 @@
   width: 100%;
   margin-top: auto;
   justify-content: space-between;
+}
+
+.active {
+  background-color: var(--third-light);
+  &:hover {
+    background-color: var(--secondary-color);
+  }
 }
