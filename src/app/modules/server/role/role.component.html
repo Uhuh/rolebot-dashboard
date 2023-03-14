@@ -16,7 +16,6 @@
     <label row-title>
       {{ category.name }} - ({{ category.reactRoles.length }} react roles)
     </label>
-    <p row-description>Manage the roles for {{ category.name }}.</p>
     <ng-container *ngFor="let rr of category.reactRoles" row-content>
       <app-react-role [reactRole]="rr"></app-react-role>
     </ng-container>

@@ -16,8 +16,6 @@
     <label row-title>
       {{ category.name }}
     </label>
-    <p row-description>Change the settings for {{ category.name }} here.</p>
-
     <app-category-form
       [category]="category"
       (updatedCategory)="updateCategory($event)"
