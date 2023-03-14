@@ -7,11 +7,11 @@
 .card-row {
   display: flex;
   flex-direction: column;
-  padding: 20px;
 }
 
 .card-row-title {
   display: flex;
+  padding: 15px;
   color: var(--white);
   align-content: center;
   user-select: none;
@@ -26,6 +26,7 @@
 .card-row-content {
   display: flex;
   flex-wrap: wrap;
+  padding: 20px;
   width: 100%;
   gap: 5px;
   padding-top: 10px;
