@@ -6,7 +6,9 @@ import {
   updateCategories,
   updateCategory,
   updateConfig,
+  updateGuildEmojis,
   updateGuildId,
+  updateGuildRoles,
   updateReactRoles,
 } from './server.actions';
 import { GuildState } from './server.model';
@@ -30,6 +32,14 @@ export const guildReducer = createReducer(
   on(updateGuildId, (state, { guildId }) => ({
     ...state,
     guildId,
+  })),
+  on(updateGuildRoles, (state, { guildRoles }) => ({
+    ...state,
+    guildRoles,
+  })),
+  on(updateGuildEmojis, (state, { guildEmojis }) => ({
+    ...state,
+    guildEmojis,
   })),
   on(addCategory, (state, { category }) => ({
     ...state,

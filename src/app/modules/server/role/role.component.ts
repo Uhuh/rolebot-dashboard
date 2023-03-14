@@ -1,7 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { combineLatest, Subject, takeUntil } from 'rxjs';
-import { ICategory, IReactRole } from 'src/app/shared/types/interfaces';
+import {
+  ICategory,
+  IGuildEmoji,
+  IGuildRole,
+  IReactRole,
+} from 'src/app/shared/types/interfaces';
 import { GuildService } from '../server.service';
 import { ReactRoleCreateComponent } from './react-role-create/react-role-create.component';
 
@@ -21,6 +26,8 @@ export class RoleComponent implements OnDestroy {
 
   categories: ICategory[] = [];
   reactRoles: IReactRole[] = [];
+  guildRoles: IGuildRole[] = [];
+  guildEmojis: IGuildEmoji[] = [];
 
   data: Category[] = [];
 
@@ -43,21 +50,33 @@ export class RoleComponent implements OnDestroy {
           reactRoles: this.reactRoles.filter((r) => r.categoryId === c.id),
         }));
 
+        // For display purposes, insert all unused react roles in this fake category.
         this.data.unshift({
           id: -1,
           name: 'React Roles without a category',
           reactRoles: this.reactRoles.filter((r) => !r.categoryId),
         });
       });
+
+    combineLatest([
+      this.guildService.guildRoles$,
+      this.guildService.guildEmojis$,
+    ])
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(([roles, emojis]) => {
+        this.guildRoles = roles;
+        this.guildEmojis = emojis;
+      });
   }
 
   createReactRole() {
     const dialogRef = this.dialog.open(ReactRoleCreateComponent, {
       minWidth: '350px',
-      maxWidth: '500px',
+      maxWidth: '800px',
       data: {
         categories: this.categories,
-        roles: [],
+        roles: this.guildRoles,
+        emojis: this.guildEmojis,
       },
     });
 

@@ -12,6 +12,7 @@ import {
 import {
   selectGuildCategories,
   selectGuildConfig,
+  selectGuildEmojis,
   selectGuildId,
   selectGuildReactRoles,
   selectGuildRoles,
@@ -21,6 +22,7 @@ import {
 export class GuildService {
   public readonly guildId$ = this.store.select(selectGuildId);
   public readonly guildRoles$ = this.store.select(selectGuildRoles);
+  public readonly guildEmojis$ = this.store.select(selectGuildEmojis);
   public readonly config$ = this.store.select(selectGuildConfig);
   public readonly categories$ = this.store.select(selectGuildCategories);
   public readonly reactRoles$ = this.store.select(selectGuildReactRoles);
