@@ -1,0 +1,9 @@
+.react-create-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  mat-form-field:first-child {
+    max-width: 100px;
+  }
+}

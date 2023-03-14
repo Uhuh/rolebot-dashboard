@@ -1,12 +1,31 @@
 <app-card>
   <h1>Create a new react role</h1>
+  <p>Users will use the emoji you select to obtain the role you pick here.</p>
   <app-card-row [expanded]="true">
     <label row-title>New react role</label>
-    <p row-description>
-      Users will use the emoji you select to obtain the role you pick here.
-    </p>
-    <div row-content>
-      <mat-select> </mat-select>
+    <div row-content class="react-create-inputs">
+      <mat-form-field>
+        <mat-label>Emoji</mat-label>
+        <input matInput requried [formControl]="emoji" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select required [formControl]="roleId">
+          <mat-option *ngFor="let role of data?.roles" [value]="role.id">
+            {{ role.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </app-card-row>
+  <button
+    mat-raised-button
+    [disabled]="isPristine || !isValid"
+    class="save"
+    color="primary"
+    type="submit"
+    (click)="onSubmit()"
+  >
+    Save
+  </button>
 </app-card>
