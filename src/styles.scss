@@ -2,9 +2,29 @@
 
 @include mat.core();
 
-$my-app-primary: mat.define-palette(mat.$teal-palette);
 $my-app-accent: mat.define-palette(mat.$grey-palette, A200, A100, A400);
-$my-app-warn: mat.define-palette(mat.$red-palette);
+
+$rolebot-palette: (
+ 50: #d3f2ff,
+ 100: #b0dbf0,
+ 200: #90c0d8,
+ 300: #6da5c0,
+ 400: #5290ad,
+ 500: #337c9b,
+ 600: #256d8a,
+ 700: #135a74,
+ 800: #00475e,
+ 900: #003246,
+ contrast: (
+   50: rgba(black, 0.87),
+   100: rgba(black, 0.87),
+   200: rgba(black, 0.87),
+   300: white,
+ )
+);
+
+$my-app-warn: mat.define-palette(mat.$red-palette, 800);
+$my-app-primary: mat.define-palette($rolebot-palette, 700);
 
 $my-app-theme: mat.define-dark-theme(
   (
@@ -56,8 +76,7 @@ html, body {
   height: 100%;
   width: 100%;
   color: var(--white);
-  background: repeating-linear-gradient(45deg, var(--third-color) 0, var(--third-color) 5%, var(--secondary-color) 0, var(--secondary-color) 50%) 0 / 30px 30px;
-  background-color: var(--secondary-color);
+  background-color: var(--secondary-dark);
 }
 
 a {
@@ -94,6 +113,7 @@ a {
     padding: 10px;
     border-radius: 4px;
     border: 2px solid var(--third-light);
+    background-color: var(--rolebot-green);
     color: var(--white);
 
     transition: all 0.2s;
@@ -120,7 +140,7 @@ a {
 }
 
 .mdc-notched-outline {
-  background-color: var(--third-light) !important;
+  background-color: var(--third-color) !important;
 }
 
 .mat-mdc-form-field-infix {
