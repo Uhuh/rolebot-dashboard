@@ -1,12 +1,13 @@
+:host {
+  border-radius: 6px;
+  background-color: var(--rolebot-green);
+  border: 3px solid var(--third-light);
+}
+
 .card-row {
   display: flex;
   flex-direction: column;
-
-  padding: 15px;
-  border-radius: 4px;
-  background-color: var(--third-color);
-
-  border-left: 4px solid var(--rolebot-red);
+  padding: 20px;
 }
 
 .card-row-title {
