@@ -181,3 +181,7 @@ a {
   color: var(--off-white);
   background-color: var(--secondary-color) !important;
 }
+
+.mat-mdc-form-field-icon-prefix {
+  z-index: 1;
+}
