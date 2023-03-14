@@ -56,6 +56,17 @@ export class ApiService {
     );
   }
 
+  createReactRole(
+    guildId: string,
+    reactRole: IReactRole
+  ): Observable<IReactRole> {
+    return this.http.put<IReactRole>(
+      `${this.apiUrl}/Role/CreateReactRole`,
+      { ...reactRole },
+      this.options({ guildId })
+    );
+  }
+
   deleteCategory(guildId: string, categoryId: string): Observable<ICategory> {
     return this.http.delete<ICategory>(
       `${this.apiUrl}/Category/Delete`,

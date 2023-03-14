@@ -26,6 +26,7 @@ export interface ICategory {
 export interface IReactRole {
   id: number;
   name: string;
+  description: string;
   roleId: string;
   emojiId: string;
   emojiTag: string | null;

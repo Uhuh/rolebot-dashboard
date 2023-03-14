@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { GuildReactType } from 'src/app/shared/types/interfaces';
 import {
   addCategory,
+  addReactRole,
   removeCategory,
   updateCategories,
   updateCategory,
@@ -86,6 +87,10 @@ export const guildReducer = createReducer(
   on(updateCategories, (state, { categories }) => ({
     ...state,
     categories: [...categories],
+  })),
+  on(addReactRole, (state, { reactRole }) => ({
+    ...state,
+    reactRoles: [...state.reactRoles, reactRole],
   })),
   on(updateReactRoles, (state, { reactRoles }) => ({
     ...state,

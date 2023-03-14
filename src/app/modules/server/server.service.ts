@@ -2,9 +2,14 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { ICategory, IGuildConfig } from 'src/app/shared/types/interfaces';
+import {
+  ICategory,
+  IGuildConfig,
+  IReactRole,
+} from 'src/app/shared/types/interfaces';
 import {
   addCategory,
+  addReactRole,
   removeCategory,
   updateCategory,
   updateConfig,
@@ -87,6 +92,17 @@ export class GuildService {
       },
       error: () =>
         this.snackbarMessage('Failed to delete the category...', 'error'),
+    });
+  }
+
+  createReactRole(guildId: string, reactRole: IReactRole) {
+    return this.apiService.createReactRole(guildId, reactRole).subscribe({
+      next: (reactRole) => {
+        this.store.dispatch(addReactRole({ reactRole }));
+        this.snackbarMessage('Successfully created react role!');
+      },
+      error: () =>
+        this.snackbarMessage('Failed to create the react role...', 'error'),
     });
   }
 }

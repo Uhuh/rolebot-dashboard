@@ -35,6 +35,10 @@ export const updateCategories = createAction(
   '[ GuildState ] Updating categories',
   props<{ categories: ICategory[] }>()
 );
+export const addReactRole = createAction(
+  '[ GuildState ] Adding react role',
+  props<{ reactRole: IReactRole }>()
+);
 export const updateReactRoles = createAction(
   '[ GuildState ] Updating react roles',
   props<{ reactRoles: IReactRole[] }>()
