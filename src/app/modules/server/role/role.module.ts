@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CardModule } from 'src/app/shared/component-modules/card/card.module';
 import { CardRowModule } from 'src/app/shared/component-modules/card/card-row/card-row.module';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactRoleModule } from './react-role/react-role.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactRoleCreateModule } from './react-role-create/react-role-create.module';
@@ -18,6 +19,7 @@ import { ReactRoleCreateModule } from './react-role-create/react-role-create.mod
   declarations: [RoleComponent],
   imports: [
     CommonModule,
+    DragDropModule,
     CdkAccordionModule,
     CardModule,
     CardRowModule,
