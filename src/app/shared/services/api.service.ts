@@ -22,6 +22,7 @@ export class ApiService {
     private readonly http: HttpClient
   ) {
     this.headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': 'https://api.rolebot.gg/',
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.cookies.get('JwtAuthCookie')}`,
     });
