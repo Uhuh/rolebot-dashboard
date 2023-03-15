@@ -13,7 +13,7 @@ import {
 
 @Injectable()
 export class ApiService {
-  private readonly apiUrl = 'https://localhost:7013/api';
+  private readonly apiUrl = 'https://api.rolebot.gg/api';
   private readonly headers: HttpHeaders;
 
   constructor(
