@@ -13,7 +13,7 @@ export class SidenavComponent implements OnDestroy {
   private readonly destroyed = new Subject<void>();
   discordIconUrl = 'https://cdn.discordapp.com/icons';
   loginUrl =
-    'https://discord.com/api/oauth2/authorize?client_id=741682757486510081&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Fservers&response_type=code&scope=identify%20guilds';
+    'https://discord.com/api/oauth2/authorize?client_id=741682757486510081&redirect_uri=https%3A%2F%2Fdashboard.rolebot.gg%2Fservers&response_type=code&scope=identify%20guilds';
 
   isFresh?: boolean = false;
   guilds: IGuild[] = [];
