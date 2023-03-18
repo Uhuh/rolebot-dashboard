@@ -12,10 +12,10 @@
   >
     Create<mat-icon>add</mat-icon>
   </button>
-  <mat-spinner
-    class="spinner"
+  <mat-progress-bar
+    mode="indeterminate"
     *ngIf="loadState === LoadState.Loading"
-  ></mat-spinner>
+  ></mat-progress-bar>
   <app-card-row *ngFor="let category of categories">
     <label row-title>
       {{ category.name }}

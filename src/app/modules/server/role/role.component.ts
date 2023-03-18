@@ -14,6 +14,7 @@ import {
   IReactRole,
 } from 'src/app/shared/types/interfaces';
 import { GuildService } from '../server.service';
+import { LoadState } from '../state/loading-state';
 import { ReactRoleCreateComponent } from './react-role-create/react-role-create.component';
 
 export interface Category {
@@ -29,6 +30,8 @@ export interface Category {
 })
 export class RoleComponent implements OnDestroy {
   private readonly destroyed = new Subject<void>();
+  readonly LoadState = LoadState;
+  loadState: LoadState = LoadState.Loading;
 
   categories: ICategory[] = [];
   reactRoles: IReactRole[] = [];
@@ -48,22 +51,28 @@ export class RoleComponent implements OnDestroy {
       this.guildService.reactRoles$,
     ])
       .pipe(takeUntil(this.destroyed))
-      .subscribe(([categories, reactRoles]) => {
-        this.categories = categories;
-        this.reactRoles = reactRoles;
+      .subscribe({
+        next: ([categories, reactRoles]) => {
+          this.categories = categories;
+          this.reactRoles = reactRoles;
+          this.loadState = LoadState.Complete;
 
-        this.data = this.categories.map<Category>((c) => ({
-          name: c.name,
-          id: c.id,
-          reactRoles: this.reactRoles.filter((r) => r.categoryId === c.id),
-        }));
+          this.data = this.categories.map<Category>((c) => ({
+            name: c.name,
+            id: c.id,
+            reactRoles: this.reactRoles.filter((r) => r.categoryId === c.id),
+          }));
 
-        // For display purposes, insert all unused react roles in this fake category.
-        this.data.unshift({
-          id: -1,
-          name: 'React Roles without a category',
-          reactRoles: this.reactRoles.filter((r) => !r.categoryId),
-        });
+          // For display purposes, insert all unused react roles in this fake category.
+          this.data.unshift({
+            id: -1,
+            name: 'React Roles without a category',
+            reactRoles: this.reactRoles.filter((r) => !r.categoryId),
+          });
+        },
+        error: () => {
+          this.loadState = LoadState.Error;
+        },
       });
 
     combineLatest([
@@ -130,6 +139,8 @@ export class RoleComponent implements OnDestroy {
           guildId: this.guildId,
           categoryId: category.id,
         };
+
+        this.loadState = LoadState.Loading;
 
         return this.guildService.createReactRole(this.guildId, reactRole);
       });

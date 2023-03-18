@@ -14,6 +14,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactRoleModule } from './react-role/react-role.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactRoleCreateModule } from './react-role-create/react-role-create.module';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [RoleComponent],
@@ -27,6 +28,7 @@ import { ReactRoleCreateModule } from './react-role-create/react-role-create.mod
     MatTreeModule,
     MatButtonModule,
     MatIconModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     ReactRoleModule,
     ReactRoleCreateModule,

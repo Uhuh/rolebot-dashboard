@@ -39,6 +39,10 @@
         Hide emojis?
       </mat-slide-toggle>
     </app-card-row>
+    <mat-progress-bar
+      mode="indeterminate"
+      *ngIf="loadState === LoadState.Loading"
+    ></mat-progress-bar>
     <button
       mat-raised-button
       [disabled]="isPristine"

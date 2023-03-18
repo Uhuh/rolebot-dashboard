@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
 import { GuildReactType, IGuildConfig } from 'src/app/shared/types/interfaces';
 import { GuildService } from '../server.service';
+import { LoadState } from '../state/loading-state';
 
 @Component({
   selector: 'app-config',
@@ -12,6 +13,10 @@ import { GuildService } from '../server.service';
 })
 export class ConfigComponent implements OnDestroy {
   private readonly destroyed = new Subject<void>();
+  readonly LoadState = LoadState;
+  errorMessage = '';
+
+  loadState: LoadState = LoadState.Loading;
   guildId?: string;
   config?: IGuildConfig;
   configForm: FormGroup;
@@ -31,10 +36,11 @@ export class ConfigComponent implements OnDestroy {
       hideEmojis: new FormControl(false),
     });
 
-    this.guildService.config$
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((config) => {
+    this.guildService.config$.pipe(takeUntil(this.destroyed)).subscribe({
+      next: (config) => {
         if (!config) {
+          this.loadState = LoadState.Error;
+          this.errorMessage = 'Uhoh! We failed to find your servers config.';
           return console.error(`Guild config missing.`);
         }
 
@@ -44,7 +50,14 @@ export class ConfigComponent implements OnDestroy {
           reactType: config.reactType,
           hideEmojis: config.hideEmojis,
         });
-      });
+
+        this.loadState = LoadState.Complete;
+        this.configForm.markAsPristine();
+      },
+      error: () => {
+        this.loadState = LoadState.Error;
+      },
+    });
 
     this.guildService.guildId$
       .pipe(takeUntil(this.destroyed))
@@ -86,9 +99,9 @@ export class ConfigComponent implements OnDestroy {
       });
     }
 
-    return this.guildService.updateConfig(updatedConfig).add(() => {
-      this.configForm.markAsPristine();
-    });
+    this.loadState = LoadState.Loading;
+
+    return this.guildService.updateConfig(updatedConfig);
   }
 
   ngOnDestroy(): void {

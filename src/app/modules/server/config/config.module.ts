@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GuildService } from '../server.service';
 import { DiscordModule } from 'src/app/shared/component-modules/discord/discord.module';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [ConfigComponent],
@@ -20,6 +21,7 @@ import { DiscordModule } from 'src/app/shared/component-modules/discord/discord.
     MatSlideToggleModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     DiscordModule,
     ReactiveFormsModule,
     RouterModule.forChild([
