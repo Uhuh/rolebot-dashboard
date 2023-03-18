@@ -12,7 +12,13 @@
     [guild]="guild"
   ></app-server-card>
 </div>
-<div *ngIf="loadState === LoadState.Complete && !guilds.length" class="empty">
+<div *ngIf="loadState === LoadState.Complete && !isFresh" class="empty">
+  <span>Make sure to login!</span>
+</div>
+<div
+  *ngIf="loadState === LoadState.Complete && !guilds.length && isFresh"
+  class="empty"
+>
   <span>Seems you manage no servers!</span>
 </div>
 <div *ngIf="loadState === LoadState.Error" class="empty">

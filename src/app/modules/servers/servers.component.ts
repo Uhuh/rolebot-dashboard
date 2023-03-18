@@ -50,8 +50,6 @@ export class ServersComponent implements OnDestroy {
     combineLatest([this.jwtService.guilds$, this.jwtService.isFresh$])
       .pipe(takeUntil(this.destroyed))
       .subscribe(([guilds, isFresh]) => {
-        if (!guilds && !isFresh) return;
-
         this.loadState = LoadState.Complete;
         this.guilds = guilds ?? [];
         this.isFresh = !!isFresh;
