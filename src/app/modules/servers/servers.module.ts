@@ -4,6 +4,7 @@ import { ServersComponent } from './servers.component';
 import { RouterModule } from '@angular/router';
 import { ServerCardModule } from './server-card/server-card.module';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [ServersComponent],
@@ -11,6 +12,7 @@ import { ApiService } from 'src/app/shared/services/api.service';
     CommonModule,
     RouterModule,
     ServerCardModule,
+    MatProgressSpinnerModule,
     RouterModule.forChild([
       {
         path: '',

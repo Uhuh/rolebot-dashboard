@@ -4,6 +4,7 @@ import {
   addCategory,
   addReactRole,
   removeCategory,
+  removeRoleCategory,
   updateCategories,
   updateCategory,
   updateConfig,
@@ -96,6 +97,17 @@ export const guildReducer = createReducer(
     ...state,
     reactRoles: [...reactRoles],
   })),
+  on(removeRoleCategory, (state, { categoryId }) => {
+    const reactRoles = [...state.reactRoles.map((r) => ({ ...r }))];
+    for (const role of reactRoles) {
+      if (role.categoryId === categoryId) role.categoryId = undefined;
+    }
+
+    return {
+      ...state,
+      reactRoles,
+    };
+  }),
   on(updateConfig, (state, { config }) => ({
     ...state,
     config: { ...config },

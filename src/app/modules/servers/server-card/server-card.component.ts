@@ -9,10 +9,13 @@ import { IGuild } from 'src/app/shared/types/interfaces';
 export class ServerCardComponent {
   @Input() guild!: IGuild;
   discordIconUrl = 'https://cdn.discordapp.com/icons';
+  defaultIcon = 'https://cdn.discordapp.com/embed/avatars/0.png';
 
   constructor() {}
 
   get iconUrl() {
-    return `${this.discordIconUrl}/${this.guild?.id}/${this.guild?.icon}.webp`;
+    return this.guild.icon
+      ? `${this.discordIconUrl}/${this.guild?.id}/${this.guild?.icon}.webp`
+      : this.defaultIcon;
   }
 }

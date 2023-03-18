@@ -43,6 +43,10 @@ export const updateReactRoles = createAction(
   '[ GuildState ] Updating react roles',
   props<{ reactRoles: IReactRole[] }>()
 );
+export const removeRoleCategory = createAction(
+  '[ GuildState ] Removing category id from roles',
+  props<{ categoryId: number }>()
+);
 export const updateConfig = createAction(
   '[ GuildState ] Updating config',
   props<{ config: IGuildConfig }>()

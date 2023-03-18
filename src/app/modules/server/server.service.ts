@@ -11,6 +11,7 @@ import {
   addCategory,
   addReactRole,
   removeCategory,
+  removeRoleCategory,
   updateCategory,
   updateConfig,
 } from './state/server.actions';
@@ -88,6 +89,7 @@ export class GuildService {
     return this.apiService.deleteCategory(guildId, `${category.id}`).subscribe({
       next: (category) => {
         this.store.dispatch(removeCategory({ category }));
+        this.store.dispatch(removeRoleCategory({ categoryId: category.id }));
         this.snackbarMessage('Successfully deleted the category!');
       },
       error: () =>

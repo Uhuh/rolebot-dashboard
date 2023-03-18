@@ -12,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CategoryCreateModule } from './category-create/category-create.module';
 import { GuildService } from '../server.service';
 import { ConfirmModalModule } from 'src/app/shared/component-modules/confirm-modal/confirm-modal.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [CategoryComponent],
@@ -24,6 +25,7 @@ import { ConfirmModalModule } from 'src/app/shared/component-modules/confirm-mod
     CategoryCreateModule,
     ConfirmModalModule,
     CommonModule,
+    MatProgressSpinnerModule,
     MatButtonModule,
     MatTooltipModule,
     RouterModule.forChild([

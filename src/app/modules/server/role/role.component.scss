@@ -11,17 +11,8 @@
   width: 100%;
 }
 
-.roles-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+.empty {
   height: 70px;
-  font-size: 18px;
-
-  border: 2px dotted var(--secondary-light);
-  background-color: var(--third-color);
-  border-radius: 6px;
 }
 
 .cdk-drag-preview {
