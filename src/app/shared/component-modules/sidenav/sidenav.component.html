@@ -1,6 +1,14 @@
 <div class="server-options">
-  <div *ngIf="selectedGuild">
-    <div class="server-info">
+  <div>
+    <a
+      *ngIf="!selectedGuild"
+      class="image"
+      href="https://rolebot.gg"
+      target="_blank"
+    >
+      <img src="assets/banners/rolebot-banner-white.png" />
+    </a>
+    <div *ngIf="selectedGuild" class="server-info">
       <img [src]="guildIcon" />
       <span class="name">{{ selectedGuild.name }}</span>
     </div>
@@ -8,34 +16,18 @@
       <a class="link" [routerLink]="['/servers']" (click)="removeSelected()">
         Servers
       </a>
-      <a
-        class="link"
-        routerLinkActive="active"
-        [routerLink]="['/dashboard/config']"
-        queryParamsHandling="merge"
-      >
-        Config
-      </a>
-      <a
-        class="link"
-        routerLinkActive="active"
-        [routerLink]="['/dashboard/category']"
-        queryParamsHandling="merge"
-      >
-        Category
-      </a>
-      <a
-        class="link"
-        routerLinkActive="active"
-        [routerLink]="['/dashboard/role']"
-        queryParamsHandling="merge"
-        >Role</a
-      >
+      <ng-container *ngIf="selectedGuild">
+        <a
+          *ngFor="let link of links"
+          class="link"
+          routerLinkActive="active"
+          [routerLink]="[link.url]"
+          queryParamsHandling="merge"
+        >
+          {{ link.name }}
+        </a>
+      </ng-container>
     </div>
-  </div>
-
-  <div *ngIf="!selectedGuild">
-    <app-info></app-info>
   </div>
 
   <div class="user-info">

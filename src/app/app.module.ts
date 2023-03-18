@@ -15,6 +15,10 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { StoreModule } from '@ngrx/store';
 import { guildReducer } from './modules/server/state/server.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +28,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot({ guildDetails: guildReducer }),
     SidenavModule,
     HttpClientModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
