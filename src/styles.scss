@@ -24,7 +24,7 @@ $rolebot-palette: (
 );
 
 $my-app-warn: mat.define-palette(mat.$red-palette, 800);
-$my-app-primary: mat.define-palette($rolebot-palette, 700);
+$my-app-primary: mat.define-palette($rolebot-palette, 600);
 
 $my-app-theme: mat.define-dark-theme(
   (

@@ -8,43 +8,50 @@
   color: var(--secondary-light);
   font-size: 18px;
 
+  .support {
+    background-color: var(--secondary-dark);
+    border: 2px solid var(--third-light);
+  }
+
+  .image, .server-info {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    border-bottom: 2px solid var(--secondary-light);
+  }
+
   .image {
-    margin: auto;
     img {
       margin: auto;
       height: 64px;
     }
   }
-}
 
-.server-info {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  .server-info {
+    display: flex;
+    flex-direction: column;
 
-  border-bottom: 2px solid var(--secondary-light);
+    img {
+      margin: auto;
+      border: 2px solid var(--secondary-light);
+      background: linear-gradient(to right, var(--secondary-color), var(--secondary-light));
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
 
-  img {
-    margin: auto;
-    border: 2px solid var(--secondary-light);
-    background: linear-gradient(to right, var(--secondary-color), var(--secondary-light));
-    border-radius: 4px;
-    margin-bottom: 10px;
+    .name {
+      color: var(--white);
+      font-size: 24px;
+      text-align: center;
+    }
   }
 
-  .name {
-    color: var(--white);
-    font-size: 24px;
-    text-align: center;
+  .server-options {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
   }
-}
-
-.server-options {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 20px;
 }
 
 .login {
@@ -78,7 +85,9 @@
 
 .active {
   background-color: var(--third-light);
+  border: 2px solid var(--off-white);
   &:hover {
-    background-color: var(--secondary-color);
+    background-color: unset;
+    border: 2px solid var(--off-white);
   }
 }

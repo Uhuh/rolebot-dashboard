@@ -1,20 +1,22 @@
 <div class="server-options">
   <div>
-    <a
-      *ngIf="!selectedGuild"
-      class="image"
-      href="https://rolebot.gg"
-      target="_blank"
-    >
-      <img src="assets/banners/rolebot-banner-white.png" />
-    </a>
+    <div *ngIf="!selectedGuild" class="image">
+      <a href="https://rolebot.gg" target="_blank">
+        <img src="assets/banners/rolebot-banner-white.png" />
+      </a>
+    </div>
     <div *ngIf="selectedGuild" class="server-info">
       <img [src]="guildIcon" />
       <span class="name">{{ selectedGuild.name }}</span>
     </div>
     <div class="links">
-      <a class="link" [routerLink]="['/servers']" (click)="removeSelected()">
-        Servers
+      <a class="link support" [routerLink]="['/servers']"> Servers </a>
+      <a
+        class="link support"
+        href="https://discord.com/invite/9BYN266sC4"
+        target="_blank"
+      >
+        Support
       </a>
       <ng-container *ngIf="selectedGuild">
         <a

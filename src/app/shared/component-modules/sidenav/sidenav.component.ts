@@ -73,12 +73,4 @@ export class SidenavComponent implements OnDestroy {
   get guildIcon() {
     return `${this.discordIconUrl}/${this.selectedGuild?.id}/${this.selectedGuild?.icon}.webp`;
   }
-
-  setSelected(guild: IGuild) {
-    this.selectedGuild = guild;
-  }
-
-  removeSelected() {
-    this.selectedGuild = undefined;
-  }
 }
