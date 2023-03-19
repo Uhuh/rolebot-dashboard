@@ -1,6 +1,7 @@
 <div>
-  <div class="empty" *ngIf="!isBotInGuild">
-    <span>RoleBot is not in this server! Invite it!</span>
+  <div class="empty links" *ngIf="!isBotInGuild">
+    <span>RoleBot is not in this server!</span>
+    <a class="link" [href]="guildInvite">Invite RoleBot!</a>
   </div>
   <router-outlet></router-outlet>
 </div>

@@ -92,6 +92,10 @@ export class ServerComponent implements OnInit, OnDestroy {
       });
   }
 
+  get guildInvite() {
+    return `https://discord.com/oauth2/authorize?client_id=741682757486510081&scope=bot%20applications.commands&permissions=2416035904&prompt=none&guild_id=${this.guild?.id}`;
+  }
+
   ngOnDestroy(): void {
     this.destroyed.next();
   }
