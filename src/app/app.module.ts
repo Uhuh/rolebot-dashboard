@@ -6,7 +6,6 @@ import Cookies from 'js-cookie';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInceptor } from './shared/interceptors/http-interceptor';
-import { SidenavModule } from './shared/component-modules/sidenav/sidenav.module';
 import { COOKIES } from './shared/tokens/cookies.token';
 import { LOCAL_STORAGE } from './shared/tokens/localStorage.token';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,11 +13,8 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { StoreModule } from '@ngrx/store';
 import { guildReducer } from './modules/server/state/server.reducer';
+import { NavModule } from './shared/component-modules/nav/nav.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,12 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({ guildDetails: guildReducer }),
-    SidenavModule,
     HttpClientModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
+    NavModule,
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
