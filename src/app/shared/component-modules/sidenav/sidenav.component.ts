@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest, Subject } from 'rxjs';
+import { combineLatest, Subject, switchMap, takeUntil } from 'rxjs';
 import { JwtService } from '../../services/jwtHandler.service';
 import { IGuild } from '../../types/interfaces';
 
@@ -39,30 +39,35 @@ export class SidenavComponent implements OnDestroy {
   isFresh?: boolean = false;
   guilds: IGuild[] = [];
   selectedGuild?: IGuild;
+  guildId?: string;
 
   constructor(
     private readonly jwtHandler: JwtService,
     private readonly route: ActivatedRoute
   ) {
-    combineLatest([
-      this.jwtHandler.isFresh$,
-      this.jwtHandler.guilds$,
-      this.route.queryParams,
-    ]).subscribe(([isFresh, guilds, params]) => {
-      if (!guilds) return;
+    this.route.queryParams
+      .pipe(
+        takeUntil(this.destroyed),
+        switchMap((params) => {
+          this.guildId = params['guildId'];
 
-      this.isFresh = isFresh;
-      this.guilds = guilds;
-      const guildId = params['guildId'];
+          return combineLatest([
+            this.jwtHandler.isFresh$,
+            this.jwtHandler.guilds$,
+          ]);
+        })
+      )
+      .subscribe(([isFresh, guilds]) => {
+        this.isFresh = isFresh;
+        this.guilds = guilds ?? [];
 
-      if (guildId) {
-        this.selectedGuild = this.guilds.find((g) => g.id === guildId);
-      }
-    });
+        this.selectedGuild = this.guilds.find((g) => g.id === this.guildId);
+      });
   }
 
   ngOnDestroy() {
     this.destroyed.next();
+    this.destroyed.complete();
   }
 
   get guildIcon() {
