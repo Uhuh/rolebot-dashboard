@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+
+  .container {
+    display: flex;
+    height: 100%;
+  }
+
+  .content {
+    display: flex;
+  }
+
+  .app-name {
+    margin: 0;
+  }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+  }
+
+  @media(max-width: 900px) {
+    flex-direction: column;
+  }
+}
+
+mat-toolbar {
+  background-color: var(--secondary-dark) !important;
+}
+
+mat-sidenav, mat-sidenav-content, mat-sidenav-container {
+  background-color: var(--secondary-dark);
+}
+
+mat-sidenav {
+  border-right: 0px;
+}
