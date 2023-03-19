@@ -5,6 +5,10 @@
 <div class="wrapper">
   <app-card [formGroup]="configForm">
     <h1>Manage your servers configuration</h1>
+    <div *ngIf="loadState === LoadState.Loading">
+      <span>Updating config...</span>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
     <app-card-row [expanded]="true">
       <label row-title>How to obtain roles</label>
       <p row-description>
@@ -39,10 +43,6 @@
         Hide emojis?
       </mat-slide-toggle>
     </app-card-row>
-    <mat-progress-bar
-      mode="indeterminate"
-      *ngIf="loadState === LoadState.Loading"
-    ></mat-progress-bar>
     <button
       mat-raised-button
       [disabled]="isPristine"

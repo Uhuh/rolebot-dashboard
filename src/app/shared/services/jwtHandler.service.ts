@@ -117,6 +117,7 @@ export class JwtService {
 
   private invalidToken() {
     this.jwtExpireDate.next(new Date(-1000));
+    this.guilds.next([]);
     this.isFresh.next(false);
   }
 

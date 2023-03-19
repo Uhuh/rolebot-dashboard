@@ -13,10 +13,10 @@
     Create react role<mat-icon>add</mat-icon>
   </button>
   <ng-container cdkDropListGroup>
-    <mat-progress-bar
-      mode="indeterminate"
-      *ngIf="loadState === LoadState.Loading"
-    ></mat-progress-bar>
+    <div *ngIf="loadState === LoadState.Loading">
+      <span>Updating react roles...</span>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
     <app-card-row *ngFor="let category of data">
       <label row-title>
         {{ category.name }} - ({{ category.reactRoles.length }} react role{{

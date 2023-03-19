@@ -53,9 +53,9 @@ export class RoleComponent implements OnDestroy {
       .pipe(takeUntil(this.destroyed))
       .subscribe({
         next: ([categories, reactRoles]) => {
-          this.categories = categories;
+          this.loadState = categories.loadState;
+          this.categories = categories.categories;
           this.reactRoles = reactRoles;
-          this.loadState = LoadState.Complete;
 
           this.data = this.categories.map<Category>((c) => ({
             name: c.name,

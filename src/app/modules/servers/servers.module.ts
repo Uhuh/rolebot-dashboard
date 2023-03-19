@@ -3,16 +3,19 @@ import { CommonModule } from '@angular/common';
 import { ServersComponent } from './servers.component';
 import { RouterModule } from '@angular/router';
 import { ServerCardModule } from './server-card/server-card.module';
+import { GuildService } from '../server/server.service';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [ServersComponent],
   imports: [
     CommonModule,
     RouterModule,
+    MatSnackBarModule,
     ServerCardModule,
-    MatProgressSpinnerModule,
+    MatProgressBarModule,
     RouterModule.forChild([
       {
         path: '',
@@ -21,7 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       },
     ]),
   ],
-  providers: [ApiService],
+  providers: [ApiService, GuildService],
   exports: [ServersComponent],
 })
 export class ServersModule {}

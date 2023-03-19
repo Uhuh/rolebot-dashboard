@@ -7,15 +7,18 @@ import {
   IGuildConfig,
   IReactRole,
 } from 'src/app/shared/types/interfaces';
+import { LoadState } from './state/loading-state';
 import {
   addCategory,
   addReactRole,
   removeCategory,
   removeRoleCategory,
+  updateAuthState,
   updateCategory,
   updateConfig,
 } from './state/server.actions';
 import {
+  selectAuthState,
   selectGuildCategories,
   selectGuildConfig,
   selectGuildEmojis,
@@ -32,6 +35,7 @@ export class GuildService {
   public readonly config$ = this.store.select(selectGuildConfig);
   public readonly categories$ = this.store.select(selectGuildCategories);
   public readonly reactRoles$ = this.store.select(selectGuildReactRoles);
+  public readonly authState$ = this.store.select(selectAuthState);
 
   constructor(
     private readonly store: Store,
@@ -46,6 +50,22 @@ export class GuildService {
     this.snackbar.open(message, 'Dismiss', {
       panelClass: `app-notification-${type}`,
     });
+
+  authorizeUser(code: string) {
+    return this.apiService.authorizeUser(code).subscribe({
+      next: () => {
+        this.store.dispatch(
+          updateAuthState({ authLoadState: LoadState.Complete })
+        );
+      },
+      error: (e) => {
+        this.store.dispatch(
+          updateAuthState({ authLoadState: LoadState.Error })
+        );
+        this.snackbarMessage('There was an issue logging you in...', 'error');
+      },
+    });
+  }
 
   updateConfig(config: IGuildConfig) {
     return this.apiService.updateConfig(config.guildId, config).subscribe({

@@ -6,6 +6,7 @@ import {
   IGuildRole,
   IReactRole,
 } from 'src/app/shared/types/interfaces';
+import { LoadState } from './loading-state';
 
 export const updateGuildId = createAction(
   '[ GuildState ] Updating id',
@@ -50,4 +51,8 @@ export const removeRoleCategory = createAction(
 export const updateConfig = createAction(
   '[ GuildState ] Updating config',
   props<{ config: IGuildConfig }>()
+);
+export const updateAuthState = createAction(
+  '[ GuildState ]Updating auth loadstate',
+  props<{ authLoadState: LoadState }>()
 );

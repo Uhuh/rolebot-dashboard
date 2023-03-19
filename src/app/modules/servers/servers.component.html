@@ -2,10 +2,13 @@
   <h1>Select a server.</h1>
   <p>Make sure to invite RoleBot!</p>
 </div>
-<mat-spinner
-  class="spinner"
-  *ngIf="loadState === LoadState.Loading"
-></mat-spinner>
+<div *ngIf="loadState === LoadState.Loading">
+  <span> Loading server info... </span>
+  <mat-progress-bar
+    class="probmat-progress-bar"
+    mode="indeterminate"
+  ></mat-progress-bar>
+</div>
 <div class="wrapper" *ngIf="isFresh">
   <app-server-card
     *ngFor="let guild of guilds"
@@ -23,5 +26,4 @@
 </div>
 <div *ngIf="loadState === LoadState.Error" class="empty">
   <span>We were unable to load your Discord servers.</span>
-  <span class="message">{{ errorMessage }}</span>
 </div>

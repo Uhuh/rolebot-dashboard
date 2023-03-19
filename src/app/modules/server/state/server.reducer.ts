@@ -1,10 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import { GuildReactType } from 'src/app/shared/types/interfaces';
+import { LoadState } from './loading-state';
 import {
   addCategory,
   addReactRole,
   removeCategory,
   removeRoleCategory,
+  updateAuthState,
   updateCategories,
   updateCategory,
   updateConfig,
@@ -16,16 +18,23 @@ import {
 import { GuildState } from './server.model';
 
 const initialState: GuildState = {
-  guildId: '0',
+  guildId: undefined,
   guildRoles: [],
   guildEmojis: [],
-  config: {
-    guildId: '-1',
-    hideEmojis: false,
-    id: 0,
-    reactType: GuildReactType.reaction,
+  guildConfig: {
+    config: {
+      guildId: '-1',
+      hideEmojis: false,
+      id: 0,
+      reactType: GuildReactType.reaction,
+    },
+    loadState: LoadState.Loading,
   },
-  categories: [],
+  categories: {
+    categories: [],
+    loadState: LoadState.Loading,
+  },
+  authLoadState: LoadState.Loading,
   reactRoles: [],
 };
 
@@ -45,49 +54,65 @@ export const guildReducer = createReducer(
   })),
   on(addCategory, (state, { category }) => ({
     ...state,
-    categories: [...state.categories, category],
+    categories: {
+      categories: [...state.categories.categories, category],
+      loadState: LoadState.Complete,
+    },
   })),
   on(removeCategory, (state, { category }) => {
-    const categoryToDelete = state.categories.find((c) => c.id === category.id);
+    const categoryToDelete = state.categories.categories.find(
+      (c) => c.id === category.id
+    );
 
     if (!categoryToDelete) {
       return { ...state };
     }
 
-    const index = state.categories.indexOf(categoryToDelete);
+    const index = state.categories.categories.indexOf(categoryToDelete);
 
     if (index < 0) {
       return { ...state };
     }
 
-    const categories = [...state.categories];
+    const categories = [...state.categories.categories];
     categories.splice(index, 1);
 
     return {
       ...state,
-      categories,
+      categories: {
+        categories,
+        loadState: LoadState.Complete,
+      },
     };
   }),
   on(updateCategory, (state, { category }) => {
-    const oldCategory = state.categories.find((c) => c.id === category.id);
+    const oldCategory = state.categories.categories.find(
+      (c) => c.id === category.id
+    );
 
     if (!oldCategory) {
       return { ...state };
     }
 
-    const categories = [...state.categories];
-    const index = state.categories.indexOf(oldCategory);
+    const categories = [...state.categories.categories];
+    const index = state.categories.categories.indexOf(oldCategory);
 
     categories[index] = { ...category };
 
     return {
       ...state,
-      categories,
+      categories: {
+        categories,
+        loadState: LoadState.Complete,
+      },
     };
   }),
   on(updateCategories, (state, { categories }) => ({
     ...state,
-    categories: [...categories],
+    categories: {
+      categories: [...categories],
+      loadState: LoadState.Complete,
+    },
   })),
   on(addReactRole, (state, { reactRole }) => ({
     ...state,
@@ -110,6 +135,13 @@ export const guildReducer = createReducer(
   }),
   on(updateConfig, (state, { config }) => ({
     ...state,
-    config: { ...config },
+    guildConfig: {
+      config,
+      loadState: LoadState.Complete,
+    },
+  })),
+  on(updateAuthState, (state, { authLoadState }) => ({
+    ...state,
+    authLoadState,
   }))
 );

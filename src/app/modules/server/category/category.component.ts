@@ -25,8 +25,8 @@ export class CategoryComponent implements OnDestroy {
   ) {
     this.guildService.categories$.pipe(takeUntil(this.destroyed)).subscribe({
       next: (categories) => {
-        this.loadState = LoadState.Complete;
-        this.categories = categories;
+        this.loadState = categories.loadState;
+        this.categories = categories.categories;
       },
       error: () => {
         this.loadState = LoadState.Error;

@@ -18,7 +18,7 @@ export const selectGuildEmojis = createSelector(
 );
 export const selectGuildConfig = createSelector(
   _selectGuildDetails,
-  (state) => state.config
+  (state) => state.guildConfig
 );
 export const selectGuildCategories = createSelector(
   _selectGuildDetails,
@@ -27,4 +27,8 @@ export const selectGuildCategories = createSelector(
 export const selectGuildReactRoles = createSelector(
   _selectGuildDetails,
   (state) => state.reactRoles
+);
+export const selectAuthState = createSelector(
+  _selectGuildDetails,
+  (state) => state.authLoadState
 );

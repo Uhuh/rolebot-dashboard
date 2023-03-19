@@ -37,21 +37,21 @@ export class ConfigComponent implements OnDestroy {
     });
 
     this.guildService.config$.pipe(takeUntil(this.destroyed)).subscribe({
-      next: (config) => {
-        if (!config) {
+      next: (guildConfig) => {
+        if (!guildConfig) {
           this.loadState = LoadState.Error;
           this.errorMessage = 'Uhoh! We failed to find your servers config.';
           return console.error(`Guild config missing.`);
         }
 
-        this.config = config;
+        this.config = guildConfig.config;
 
         this.configForm.patchValue({
-          reactType: config.reactType,
-          hideEmojis: config.hideEmojis,
+          reactType: guildConfig.config.reactType,
+          hideEmojis: guildConfig.config.hideEmojis,
         });
 
-        this.loadState = LoadState.Complete;
+        this.loadState = guildConfig.loadState;
         this.configForm.markAsPristine();
       },
       error: () => {
