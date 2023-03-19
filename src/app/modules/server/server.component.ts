@@ -23,6 +23,7 @@ import { GuildState } from './state/server.model';
 export class ServerComponent implements OnInit, OnDestroy {
   private readonly destroyed = new Subject<void>();
   guild?: IGuild;
+  isBotInGuild = true;
 
   constructor(
     private readonly jwtHandler: JwtService,
@@ -74,11 +75,20 @@ export class ServerComponent implements OnInit, OnDestroy {
     this.apiService
       .getGuildInfo(this.guild?.id)
       .pipe(takeUntil(this.destroyed))
-      .subscribe((guildInfo) => {
-        this.store.dispatch(updateGuildRoles({ guildRoles: guildInfo.roles }));
-        this.store.dispatch(
-          updateGuildEmojis({ guildEmojis: guildInfo.emojis })
-        );
+      .subscribe({
+        next: (guildInfo) => {
+          this.isBotInGuild = true;
+          this.store.dispatch(
+            updateGuildRoles({ guildRoles: guildInfo.roles })
+          );
+          this.store.dispatch(
+            updateGuildEmojis({ guildEmojis: guildInfo.emojis })
+          );
+        },
+        error: () => {
+          // If this request fails, it most likely means the bot isn't in the guild.
+          this.isBotInGuild = false;
+        },
       });
   }
 

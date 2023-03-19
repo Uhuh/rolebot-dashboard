@@ -1,3 +1,6 @@
 <div>
+  <div class="empty" *ngIf="!isBotInGuild">
+    <span>RoleBot is not in this server! Invite it!</span>
+  </div>
   <router-outlet></router-outlet>
 </div>
